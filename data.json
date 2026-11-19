@@ -1,0 +1,30 @@
+{
+  "categorias": [
+    { "id": "monumento", "nombre": "Monumentos", "seccion": "monumentos", "color": "#C8102E" },
+    { "id": "paisaje", "nombre": "Paisajes", "seccion": "paisajes", "color": "#1E824C" },
+    { "id": "senderismo", "nombre": "Senderismo", "seccion": "senderismo", "color": "#2E7D32" },
+    { "id": "cultura", "nombre": "Cultura", "seccion": "cultura", "color": "#6A1B9A" },
+    { "id": "restaurante", "nombre": "Gastronomía", "seccion": "restaurantes", "color": "#D35400" },
+    { "id": "evento", "nombre": "Eventos", "seccion": "eventos", "color": "#1F4E9C" },
+    { "id": "concierto", "nombre": "Música en vivo", "seccion": "conciertos", "color": "#AD1457" },
+    { "id": "libreria", "nombre": "Librerías", "seccion": "librerias", "color": "#4E342E" },
+    { "id": "museo", "nombre": "Museos y artistas", "seccion": "museos", "color": "#00838F" }
+  ],
+  "etiquetasColores": {
+    "Historia": "#C8102E",
+    "Zona Colonial": "#1F4E9C"
+  },
+  "pois": [
+    {
+      "id": "alcazar-colon",
+      "categoria": "monumento",
+      "etiquetas": ["Historia", "Zona Colonial"],
+      "nombre": "Alcázar de Colón",
+      "descripcion": "Palacio del siglo XVI construido para Diego Colón, hijo del almirante. Sus salas conservan mobiliario de época y miran a la plaza de España y al río Ozama.",
+      "lat": 18.4784,
+      "lng": -69.8836,
+      "imagenes": ["imagen/alcazar1.jpg", "imagen/alcazar2.jpg"],
+      "web": "https://es.wikipedia.org/wiki/Alcázar_de_Colón"
+    }
+  ]
+}

@@ -78,7 +78,7 @@ function initUI() {
 function card(p, withMore = true, highlightColor = null) {
   const cColor = highlightColor || catColor(p.categoria);
   const imgs = (p.imagenes || []).map(s => `<img src="${esc(s)}" alt="${esc(p.nombre)}" loading="lazy" onerror="this.remove()">`).join('');
-  const osmUrl = `[openstreetmap.org](https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lng}#map=16/${p.lat}/${p.lng})`;
+  const osmUrl = `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lng}#map=16/${p.lat}/${p.lng}`;
   const tagsHtml = [
     `<span class="tag" style="--pill-color:${esc(catColor(p.categoria))}">${esc(catName(p.categoria))}</span>`,
     ...(p.etiquetas || []).map(t => `<span class="tag" style="--pill-color:${esc(tagColor(t, p.categoria))}">${esc(t)}</span>`)
@@ -239,9 +239,9 @@ function setupMap() {
   map = L.map(mapEl).setView([18.9, -70.2], 8);
   window.map = map;
 
-  L.tileLayer('[tile.openstreetmap.org](https://tile.openstreetmap.org/{z}/{x}/{y}.png)', {
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    attribution: '&copy; <a href="[openstreetmap.org](https://www.openstreetmap.org/copyright)">OpenStreetMap</a>'
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
   }).addTo(map);
 
   routeLayer = L.layerGroup().addTo(map);
@@ -268,7 +268,7 @@ async function drawRoute() {
   const coords = pts.map(p => `${p.lng},${p.lat}`).join(';');
 
   try {
-    const res = await fetch(`[router.project-osrm.org](https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson)`);
+    const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`);
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     if (data.code !== 'Ok' || !data.routes?.length) throw new Error('Ruta no disponible');

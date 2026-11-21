@@ -1,41 +1,123 @@
 {
   "categorias": [
-    { "id": "monumento", "nombre": "Monumentos", "seccion": "monumentos", "color": "#C8102E" },
-    { "id": "paisaje", "nombre": "Paisajes", "seccion": "paisajes", "color": "#1E824C" },
-    { "id": "senderismo", "nombre": "Senderismo", "seccion": "senderismo", "color": "#2E7D32" },
-    { "id": "cultura", "nombre": "Cultura", "seccion": "cultura", "color": "#6A1B9A" },
-    { "id": "restaurante", "nombre": "Gastronomía", "seccion": "restaurantes", "color": "#D35400" },
-    { "id": "evento", "nombre": "Eventos", "seccion": "eventos", "color": "#1F4E9C" },
-    { "id": "concierto", "nombre": "Música en vivo", "seccion": "conciertos", "color": "#AD1457" },
-    { "id": "libreria", "nombre": "Librerías", "seccion": "librerias", "color": "#4E342E" },
-    { "id": "museo", "nombre": "Museos y artistas", "seccion": "museos", "color": "#00838F" }
+    {
+      "id": "monumento",
+      "nombre": "Monumentos",
+      "seccion": "monumentos",
+      "color": "#C8102E"
+    },
+    {
+      "id": "paisaje",
+      "nombre": "Paisajes",
+      "seccion": "paisajes",
+      "color": "#1E824C"
+    },
+    {
+      "id": "senderismo",
+      "nombre": "Senderismo",
+      "seccion": "senderismo",
+      "color": "#2E7D32"
+    },
+    {
+      "id": "cultura",
+      "nombre": "Cultura",
+      "seccion": "cultura",
+      "color": "#6A1B9A"
+    },
+    {
+      "id": "restaurante",
+      "nombre": "Gastronomía",
+      "seccion": "restaurantes",
+      "color": "#D35400"
+    },
+    {
+      "id": "evento",
+      "nombre": "Eventos",
+      "seccion": "eventos",
+      "color": "#1F4E9C"
+    },
+    {
+      "id": "concierto",
+      "nombre": "Música en vivo",
+      "seccion": "conciertos",
+      "color": "#AD1457"
+    },
+    {
+      "id": "libreria",
+      "nombre": "Librerías",
+      "seccion": "librerias",
+      "color": "#4E342E"
+    },
+    {
+      "id": "museo",
+      "nombre": "Museos y artistas",
+      "seccion": "museos",
+      "color": "#00838F"
+    }
   ],
   "etiquetasColores": {
     "Historia": "#C8102E",
-    "Zona Colonial": "#1F4E9C"
+    "Zona Colonial": "#1F4E9C",
+    "Carnaval": "#6A1B9A",
+    "Cultura popular": "#D35400"
   },
   "pois": [
     {
       "id": "alcazar-colon",
       "categoria": "monumento",
-      "etiquetas": ["Historia", "Zona Colonial"],
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
       "nombre": "Alcázar de Colón",
       "descripcion": "Palacio del siglo XVI construido para Diego Colón, hijo del almirante. Sus salas conservan mobiliario de época y miran a la plaza de España y al río Ozama.",
       "lat": 18.4784,
       "lng": -69.8836,
-      "imagenes": ["imagen/alcazar1.jpg", "imagen/alcazar2.jpg"],
-      "web": "https://es.wikipedia.org/wiki/Alcázar_de_Colón"
+      "imagenes": [
+        "imagen/alcazar1.jpg",
+        "imagen/alcazar2.jpg"
+      ],
+      "web": "https://es.wikipedia.org/wiki/Alcázar_de_Colón",
+      "ciudad": "Santo Domingo"
     },
     {
       "id": "catedral-primada",
       "categoria": "monumento",
-      "etiquetas": ["Historia", "Zona Colonial"],
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
       "nombre": "Catedral Primada de América",
       "descripcion": "Primera catedral construida en el Nuevo Mundo. Sus obras comenzaron en 1512 y terminaron hacia 1540. Combina gótico y renacimiento, y se levanta en el parque Colón, frente a la antigua plaza mayor de Santo Domingo.",
       "lat": 18.4735,
       "lng": -69.8835,
-      "imagenes": ["imagen/catedral1.jpg", "imagen/catedral2.jpg"],
-      "web": "https://es.wikipedia.org/wiki/Catedral_Primada_de_América"
+      "imagenes": [
+        "imagen/catedral1.jpg",
+        "imagen/catedral2.jpg"
+      ],
+      "web": "https://es.wikipedia.org/wiki/Catedral_Primada_de_América",
+      "ciudad": "Santo Domingo"
+    },
+    {
+      "id": "carnaval-vegano",
+      "categoria": "evento",
+      "etiquetas": [
+        "Carnaval",
+        "Cultura popular"
+      ],
+      "nombre": "Carnaval Vegano de La Vega",
+      "ciudad": "La Vega",
+      "descripcion": "Uno de los carnavales más emblemáticos del país: desfiles de diablos cojuelos y comparsas por las calles de La Vega, con conciertos en el Parque Duarte. La ciudad cuenta además con el primer museo del carnaval de República Dominicana.",
+      "cuando": "Domingos de febrero (fechas de 2027 por confirmar)",
+      "repite": "Anual",
+      "fecha": "2027-02-07",
+      "fechaFin": "2027-02-28",
+      "lat": 19.221,
+      "lng": -70.529,
+      "imagenes": [
+        "imagen/carnaval-vega1.jpg",
+        "imagen/carnaval-vega2.jpg"
+      ]
     }
   ]
 }

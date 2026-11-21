@@ -8,14 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&amp;family=Instrument+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <script>document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light';</script>
+  <script>document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light'; document.documentElement.dataset.palette = localStorage.getItem('palette') || 'red';</script>
   <script src="js/app.js" defer></script>
 </head>
 <body data-page="conoce">
   <header id="topbar">
     <button id="burger" type="button" aria-label="Abrir menú">☰</button>
     <ul id="menu">
-      <li><a href="index.html" class="logo" aria-label="Inicio"><span class="flag"></span></a></li>
+      <li><button type="button" class="logo" id="logo" aria-label="Cambiar colores de la página (rojo / azul)" title="Cambiar colores"><span class="flag"></span></button></li>
       <li><a href="index.html" data-nav="inicio">Inicio</a></li>
       <li><a href="conoce.html" data-nav="conoce">Conoce RD</a></li>
       <li><a href="planifica.html" data-nav="planifica">Planifica</a></li>
@@ -27,7 +27,32 @@
 
   <main class="wrap">
     <h1 class="page-title">Conoce República Dominicana</h1>
-    <div id="secciones"></div>
+    <section class="filters" id="filtros" aria-label="Buscador">
+      <input id="bq" type="search" placeholder="Buscar por nombre…" aria-label="Buscar por nombre">
+      <div class="f-row">
+        <label>Tipo
+          <select id="ftipo"><option value="">Todos</option></select>
+        </label>
+        <label>Ciudad
+          <select id="fciudad"><option value="">Todas</option></select>
+        </label>
+        <label class="f-fecha" hidden>Evento desde
+          <input type="date" id="fdesde">
+        </label>
+        <label class="f-fecha" hidden>Evento hasta
+          <input type="date" id="fhasta">
+        </label>
+      </div>
+      <div class="chips" id="ftags" aria-label="Etiquetas"></div>
+      <div class="f-foot">
+        <span id="fcount" aria-live="polite"></span>
+        <button class="btn alt" id="fclear" type="button">Limpiar filtros</button>
+      </div>
+    </section>
+
+    <div class="grid" id="lista-conoce"></div>
+    <div id="sentinel"></div>
+    <p class="note" id="fin"></p>
   </main>
 
   <footer>© República Dominicana · Guía de viaje</footer>

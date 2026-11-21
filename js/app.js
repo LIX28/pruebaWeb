@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   if (PAGE === 'inicio') initHomeFilterAndRotator();
-  if (PAGE === 'conoce') renderSecciones();
+  if (PAGE === 'conoce') initConoce();
   if (PAGE === 'planifica') initPlan();
 });
 
@@ -44,6 +44,12 @@ function initUI() {
     paintIcon();
     // repintar mapa si existe (el contenedor cambia de color)
     if (window.map?.invalidateSize) window.map.invalidateSize();
+  });
+
+  // Pulsar el logo intercambia rojo <-> azul en toda la web
+  $('#logo')?.addEventListener('click', () => {
+    root.dataset.palette = root.dataset.palette === 'blue' ? 'red' : 'blue';
+    localStorage.setItem('palette', root.dataset.palette);
   });
 
   // Marca la página activa
@@ -89,6 +95,7 @@ function card(p, withMore = true, highlightColor = null) {
     <div class="body">
       <div class="tags">${tagsHtml}</div>
       <h3>${esc(p.nombre)}</h3>
+      ${p.ciudad ? `<div class="city">📍 ${esc(p.ciudad)}</div>` : ''}
       ${p.cuando ? `<div class="when">${esc(p.cuando)}${p.repite ? ' · ' + esc(p.repite) : ''}</div>` : ''}
       <p class="desc">${linkify(p.descripcion)}</p>
       ${withMore ? '<button class="more" type="button">Ver más</button>' : ''}
@@ -149,31 +156,93 @@ function initHomeFilterAndRotator() {
   }
 }
 
-/* ====== Conoce ====== */
-function renderSecciones() {
-  const cont = $('#secciones');
-  if (!cont) return;
-  cont.innerHTML = DATA.categorias.map(c => {
-    const l = DATA.pois.filter(p => p.categoria === c.id);
-    if (!l.length) return '';
-    return `<section class="sec" id="${esc(c.seccion)}" style="--cat-color:${esc(c.color || '#C8102E')}">
-      <h2>${esc(c.nombre)}</h2>
-      <div class="grid">${l.map((p, i) => i < 3 ? card(p) : card(p).replace('<article', '<article hidden data-extra')).join('')}</div>
-      ${l.length > 3 ? '<button class="btn alt show-more" type="button">Ver más</button>' : ''}
-    </section>`;
-  }).join('');
+/* ====== Conoce: lista infinita + buscador ====== */
+const BATCH = 6;
+const norm = t => String(t ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 
-  cont.addEventListener('click', e => {
-    if (!e.target.matches('.show-more')) return;
-    const sec = e.target.closest('.sec');
-    const open = e.target.dataset.open !== '1';
-    sec.querySelectorAll('[data-extra]').forEach(h => h.hidden = !open);
-    e.target.dataset.open = open ? '1' : '';
-    e.target.textContent = open ? 'Ver menos' : 'Ver más';
+function initConoce() {
+  const grid = $('#lista-conoce'), sentinel = $('#sentinel'), fin = $('#fin');
+  if (!grid || !sentinel) return;
+
+  const f = { q: '', tipo: '', ciudad: '', tags: new Set(), desde: '', hasta: '' };
+  let results = [], shown = 0, io = null;
+
+  // Opciones de los filtros a partir de data.json
+  const cats = DATA.categorias.filter(c => DATA.pois.some(p => p.categoria === c.id));
+  $('#ftipo').insertAdjacentHTML('beforeend', cats.map(c => `<option value="${esc(c.id)}">${esc(c.nombre)}</option>`).join(''));
+  const ciudades = [...new Set(DATA.pois.map(p => p.ciudad).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es'));
+  $('#fciudad').insertAdjacentHTML('beforeend', ciudades.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join(''));
+  const tags = [...new Set(DATA.pois.flatMap(p => p.etiquetas || []))].sort((a, b) => a.localeCompare(b, 'es'));
+  $('#ftags').innerHTML = tags.map(t => `<button class="chip" type="button" data-t="${esc(t)}">${esc(t)}</button>`).join('');
+
+  // conoce.html#eventos preselecciona el tipo
+  const hc = DATA.categorias.find(c => c.seccion === location.hash.slice(1));
+  if (hc) { f.tipo = hc.id; $('#ftipo').value = hc.id; }
+
+  const matches = p => {
+    if (f.q && !norm(p.nombre).includes(f.q)) return false;
+    if (f.tipo && p.categoria !== f.tipo) return false;
+    if (f.ciudad && p.ciudad !== f.ciudad) return false;
+    if (f.tags.size && !(p.etiquetas || []).some(t => f.tags.has(t))) return false;
+    if (f.tipo === 'evento' && (f.desde || f.hasta)) {
+      if (!p.fecha) return false;
+      const fin = p.fechaFin || p.fecha;           // el evento solapa con el rango elegido
+      if (f.desde && fin < f.desde) return false;
+      if (f.hasta && p.fecha > f.hasta) return false;
+    }
+    return true;
+  };
+
+  const more = () => {
+    if (shown >= results.length) return;
+    const next = results.slice(shown, shown + BATCH);
+    grid.insertAdjacentHTML('beforeend', next.map(p => card(p)).join(''));
+    shown += next.length;
+    fin.textContent = shown >= results.length ? 'Has llegado al final de la lista.' : '';
+    if (io) { io.unobserve(sentinel); if (shown < results.length) io.observe(sentinel); }
+  };
+
+  const syncDates = () => {
+    const isEvent = f.tipo === 'evento';
+    document.querySelectorAll('.f-fecha').forEach(l => l.hidden = !isEvent);
+    if (!isEvent) { f.desde = f.hasta = ''; $('#fdesde').value = $('#fhasta').value = ''; }
+  };
+
+  const apply = () => {
+    syncDates();
+    results = DATA.pois.filter(matches);
+    if (f.tipo === 'evento') results.sort((a, b) => (a.fecha || '9999').localeCompare(b.fecha || '9999'));
+    shown = 0;
+    grid.innerHTML = '';
+    $('#fcount').textContent = `${results.length} ${results.length === 1 ? 'resultado' : 'resultados'}`;
+    if (!results.length) { fin.textContent = 'Sin resultados. Prueba con otros filtros.'; return; }
+    fin.textContent = '';
+    if (!('IntersectionObserver' in window)) { while (shown < results.length) more(); return; }
+    if (!io) io = new IntersectionObserver(es => { if (es.some(e => e.isIntersecting)) more(); }, { rootMargin: '400px' });
+    more();
+  };
+
+  $('#bq').addEventListener('input', e => { f.q = norm(e.target.value); apply(); });
+  $('#ftipo').addEventListener('change', e => { f.tipo = e.target.value; apply(); });
+  $('#fciudad').addEventListener('change', e => { f.ciudad = e.target.value; apply(); });
+  $('#fdesde').addEventListener('change', e => { f.desde = e.target.value; apply(); });
+  $('#fhasta').addEventListener('change', e => { f.hasta = e.target.value; apply(); });
+  $('#ftags').addEventListener('click', e => {
+    const b = e.target.closest('.chip'); if (!b) return;
+    const t = b.dataset.t;
+    f.tags.has(t) ? f.tags.delete(t) : f.tags.add(t);
+    b.classList.toggle('on', f.tags.has(t));
+    apply();
+  });
+  $('#fclear').addEventListener('click', () => {
+    Object.assign(f, { q: '', tipo: '', ciudad: '', desde: '', hasta: '' });
+    f.tags.clear();
+    $('#bq').value = ''; $('#ftipo').value = ''; $('#fciudad').value = '';
+    document.querySelectorAll('#ftags .chip.on').forEach(c => c.classList.remove('on'));
+    apply();
   });
 
-  // Si se llega con conoce.html#monumentos, desplazarse a la sección
-  if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+  apply();
 }
 
 /* ====== Planifica (Leaflet + OpenStreetMap) ====== */

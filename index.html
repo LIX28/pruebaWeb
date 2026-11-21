@@ -8,14 +8,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&amp;family=Instrument+Sans:wght@400;600&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <script>document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light';</script>
+  <script>document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light'; document.documentElement.dataset.palette = localStorage.getItem('palette') || 'red';</script>
   <script src="js/app.js" defer></script>
 </head>
 <body data-page="inicio">
   <header id="topbar">
     <button id="burger" type="button" aria-label="Abrir menú">☰</button>
     <ul id="menu">
-      <li><a href="index.html" class="logo" aria-label="Inicio"><span class="flag"></span></a></li>
+      <li><button type="button" class="logo" id="logo" aria-label="Cambiar colores de la página (rojo / azul)" title="Cambiar colores"><span class="flag"></span></button></li>
       <li><a href="index.html" data-nav="inicio">Inicio</a></li>
       <li><a href="conoce.html" data-nav="conoce">Conoce RD</a></li>
       <li><a href="planifica.html" data-nav="planifica">Planifica</a></li>

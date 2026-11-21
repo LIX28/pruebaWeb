@@ -1,7 +1,7 @@
 :root{
   --color-1:#C8102E; --color-2:#1F4E9C; --color-3:#F5F3EE; --color-4:#EEB7C0; --color-5:#2B2B2B; --color-6:#8FA6CE;
   --bg:var(--color-3); --text:var(--color-5); --surface:#fff; --accent:var(--color-1); --accent2:var(--color-2); --soft:var(--color-4); --line:rgba(43,43,43,.15);
-  --f-head:'Fraunces',Georgia,serif; --f-body:'Instrument Sans',system-ui,sans-serif;
+  --bar:var(--color-1); --f-head:'Fraunces',Georgia,serif; --f-body:'Instrument Sans',system-ui,sans-serif;
 }
 [data-theme=dark]{ --bg:var(--color-5); --text:var(--color-3); --surface:#363636; --accent:var(--color-4); --accent2:var(--color-6); --soft:var(--color-1); --line:rgba(245,243,238,.18); }
 *{box-sizing:border-box}
@@ -13,13 +13,14 @@ h1,h2,h3{font-family:var(--f-head);line-height:1.1}
 :focus-visible{outline:3px solid var(--accent2);outline-offset:2px}
 
 /* Menú */
-#topbar{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;justify-content:center;align-items:center;gap:1rem;padding:.6rem 1rem;background:var(--bg);border-bottom:1px solid var(--line);transition:transform .4s,background .4s}
+#topbar{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;justify-content:flex-start;align-items:center;gap:1rem;padding:.6rem 4.5rem .6rem 1rem;background:var(--bar);color:#fff;box-shadow:0 2px 12px rgba(0,0,0,.25);transition:transform .4s,background .4s}
+#topbar :focus-visible{outline-color:#fff}
 #topbar.hidden{transform:translateY(-110%)}
 #menu{display:flex;align-items:center;gap:clamp(1rem,3vw,2.5rem);list-style:none;margin:0;padding:0}
-#menu a{text-decoration:none;font-weight:600;padding:.3rem .1rem;border-bottom:2px solid transparent}
-#menu a:hover,#menu a.on{border-color:var(--accent)}
-.flag{display:block;width:46px;height:32px;border:1px solid var(--line);background:linear-gradient(var(--color-3),var(--color-3)) center/100% 6px no-repeat,linear-gradient(var(--color-3),var(--color-3)) center/6px 100% no-repeat,conic-gradient(from 90deg at 50% 50%,var(--color-2) 0 25%,var(--color-1) 0 50%,var(--color-2) 0 75%,var(--color-1) 0)}
-#burger,#theme{background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;font-size:1.2rem;padding:.25rem .6rem;cursor:pointer}
+#menu a{text-decoration:none;font-weight:600;color:#fff;padding:.3rem .1rem;border-bottom:2px solid transparent}
+#menu a:hover,#menu a.on{border-color:#fff}
+.flag{display:block;width:46px;height:32px;border:1px solid rgba(255,255,255,.8);background:linear-gradient(var(--color-3),var(--color-3)) center/100% 6px no-repeat,linear-gradient(var(--color-3),var(--color-3)) center/6px 100% no-repeat,conic-gradient(from 90deg at 50% 50%,var(--color-2) 0 25%,var(--color-1) 0 50%,var(--color-2) 0 75%,var(--color-1) 0)}
+#burger,#theme{background:none;border:1px solid rgba(255,255,255,.55);color:#fff;border-radius:8px;font-size:1.2rem;padding:.25rem .6rem;cursor:pointer}
 #burger{display:none}#theme{position:absolute;right:1rem}
 #scrim{display:none}
 
@@ -109,12 +110,25 @@ h1,h2,h3{font-family:var(--f-head);line-height:1.1}
 .res{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1rem;margin-top:1rem;display:flex;justify-content:space-between;gap:1rem}
 footer{text-align:center;padding:2rem;opacity:.7}
 
+/* Ajustes de barra fija y mapa */
+main{padding-top:3.5rem}
+.hero-banner{margin-top:-3.5rem}
+#map.leaflet-container{display:block;padding:0}
+
+/* Menú en escritorio: a la izquierda; en Inicio el logo va en el centro */
+@media (min-width:801px){
+  #menu{flex:1}
+  body[data-page=inicio] #menu{position:relative}
+  body[data-page=inicio] #menu>li:first-child{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%)}
+  body[data-page=inicio] #menu>li:nth-child(4){margin-left:auto}
+}
+
 @media (max-width:900px){
   .rail{grid-template-columns:repeat(2,1fr)}.plan{grid-template-columns:1fr}
 }
 @media (max-width:800px){
   #topbar{justify-content:flex-start}#burger{display:block}
-  #menu{position:fixed;top:0;left:0;bottom:0;width:260px;flex-direction:column;align-items:flex-start;gap:1.2rem;padding:4.5rem 1.5rem;background:var(--bg);transform:translateX(-105%);transition:transform .35s;z-index:41;border-right:1px solid var(--line)}
+  #menu{position:fixed;top:0;left:0;bottom:0;width:260px;flex-direction:column;align-items:flex-start;gap:1.2rem;padding:4.5rem 1.5rem;background:var(--bar);transform:translateX(-105%);transition:transform .35s;z-index:41;box-shadow:4px 0 16px rgba(0,0,0,.3)}
   #menu.open{transform:none}
   #menu .logo{order:-1}
   #scrim.on{display:block;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40}

@@ -25,6 +25,17 @@
       "lng": -69.8836,
       "imagenes": ["imagen/alcazar1.jpg", "imagen/alcazar2.jpg"],
       "web": "https://es.wikipedia.org/wiki/Alcázar_de_Colón"
+    },
+    {
+      "id": "catedral-primada",
+      "categoria": "monumento",
+      "etiquetas": ["Historia", "Zona Colonial"],
+      "nombre": "Catedral Primada de América",
+      "descripcion": "Primera catedral construida en el Nuevo Mundo. Sus obras comenzaron en 1512 y terminaron hacia 1540. Combina gótico y renacimiento, y se levanta en el parque Colón, frente a la antigua plaza mayor de Santo Domingo.",
+      "lat": 18.4735,
+      "lng": -69.8835,
+      "imagenes": ["imagen/catedral1.jpg", "imagen/catedral2.jpg"],
+      "web": "https://es.wikipedia.org/wiki/Catedral_Primada_de_América"
     }
   ]
 }

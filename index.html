@@ -1,84 +1,41 @@
 <!DOCTYPE html>
 <html lang="es" data-theme="light">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Conoce República Dominicana</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Instrument+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conoce República Dominicana</title>
+  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Instrument+Sans:wght@400;600&display=swap)" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light';</script>
+  <script src="app.js" defer></script>
 </head>
-<body>
-<header id="topbar">
-  <button id="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
-  <nav aria-label="Principal">
+<body data-page="inicio">
+  <header id="topbar">
+    <button id="burger" type="button" aria-label="Abrir menú">☰</button>
     <ul id="menu">
-      <li><a href="#inicio">Inicio</a></li>
-      <li><a href="#conoce">Conoce República Dominicana</a></li>
-      <li class="logo"><a href="#inicio" aria-label="República Dominicana"><span class="flag"></span></a></li>
-      <li><a href="#planifica">Planifica tu viaje</a></li>
-      <li><a href="#vuelo">Contrata tu vuelo</a></li>
+      <li><a href="index.html" class="logo" aria-label="Inicio"><span class="flag"></span></a></li>
+      <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+      <li><a href="conoce.html" data-nav="conoce">Conoce RD</a></li>
+      <li><a href="planifica.html" data-nav="planifica">Planifica</a></li>
+      <li><a href="[booking.com](https://www.booking.com/flights/)" target="_blank" rel="noopener">Planea tu vuelo</a></li>
     </ul>
-  </nav>
-  <button id="theme" aria-label="Cambiar modo claro/oscuro">◐</button>
-</header>
-<div id="scrim"></div>
+    <button id="theme" type="button" aria-label="Cambiar tema">🌙</button>
+  </header>
+  <div id="scrim"></div>
 
-<main>
-  <section data-view="inicio" id="v-inicio">
-    <div class="hero-banner">
+  <main>
+    <section class="hero-banner">
       <h1 class="hero-title">Conoce República Dominicana.</h1>
-    </div>
+    </section>
     <p class="hero-intro">Donde el Caribe huele a café recién colado, el merengue sale por las ventanas y cada esquina colonial guarda quinientos años de historia.</p>
 
-    <div class="wrap" id="inicio-pois-wrap">
-      <h2 class="conoce" id="conoce-heading">Conoce su <a href="#conoce" id="rot" class="rot"></a></h2>
+    <div class="wrap" id="inicio-pois-wrap" hidden>
+      <h2 class="conoce">Conoce su <a href="conoce.html" class="rot" id="rot"></a></h2>
       <div id="previews"></div>
     </div>
-  </section>
+  </main>
 
-  <section data-view="conoce" id="v-conoce" hidden>
-    <div class="wrap">
-      <h1 class="page-title">Conoce República Dominicana</h1>
-      <div id="secciones"></div>
-    </div>
-  </section>
-
-  <section data-view="planifica" id="v-planifica" hidden>
-    <div class="wrap plan">
-      <aside>
-        <input id="q" type="search" placeholder="Buscar lugares, platos, eventos…" aria-label="Buscar">
-        <div id="chips" class="chips"></div>
-        <div class="row">
-          <button id="auto" class="btn alt">Añadir por etiquetas</button>
-          <button id="ruta" class="btn">Trazar ruta</button>
-        </div>
-        <ul id="lista" class="lista"></ul>
-      </aside>
-      <div><div id="map"><p id="mapmsg"></p></div><p id="info" class="note"></p></div>
-    </div>
-  </section>
-
-  <section data-view="vuelo" id="v-vuelo" hidden>
-    <div class="wrap narrow">
-      <h2>Contrata tu vuelo</h2>
-      <p class="note">Simulación: no se realiza ninguna reserva real.</p>
-      <form id="vueloForm" class="form">
-        <label>Origen<input name="o" required placeholder="Sevilla (SVQ)"></label>
-        <label>Destino
-          <select name="d"><option>Punta Cana (PUJ)</option><option>Santo Domingo (SDQ)</option><option>Puerto Plata (POP)</option><option>Santiago (STI)</option></select>
-        </label>
-        <label>Ida<input type="date" name="i" required></label>
-        <label>Vuelta<input type="date" name="v"></label>
-        <label>Pasajeros<input type="number" name="p" min="1" max="9" value="1"></label>
-        <button class="btn" type="submit">Buscar vuelos</button>
-      </form>
-      <div id="vueloRes" aria-live="polite"></div>
-    </div>
-  </section>
-</main>
-<footer>© República Dominicana · proyecto de viaje</footer>
-<script src="js/app.js"></script>
+  <footer>© República Dominicana · Guía de viaje</footer>
 </body>
 </html>

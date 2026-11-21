@@ -10,26 +10,75 @@ const catName = id => catObj(id)?.nombre ?? id;
 const catColor = id => catObj(id)?.color ?? '#C8102E';
 const tagColor = (tag, fallbackCatId) => DATA.etiquetasColores?.[tag] || catColor(fallbackCatId);
 const linkify = t => esc(t).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">receta/enlace</a>');
+const PAGE = document.body.dataset.page;
 
-/* ====== Datos ====== */
-async function init() {
+/* ====== Arranque ====== */
+document.addEventListener('DOMContentLoaded', async () => {
+  initUI(); // tema y menú funcionan aunque falle el fetch
+
   try {
-    DATA = await (await fetch('data.json')).json();
+    const res = await fetch('./data.json', { cache: 'no-cache' });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    DATA = await res.json();
   } catch (e) {
-    document.body.insertAdjacentHTML('afterbegin', '<p style="padding:5rem 1rem">No se pudo cargar data.json. Sirve el sitio con un servidor local o GitHub Pages.</p>');
+    console.error('Error cargando data.json:', e);
+    $('main')?.insertAdjacentHTML('afterbegin',
+      '<p class="wrap">No se pudo cargar data.json. Comprueba que está en la raíz del repositorio (en local, usa un servidor, no file://).</p>');
     return;
   }
-  initHomeFilterAndRotator();
-  renderSecciones();
-  initPlan();
-  route();
+
+  if (PAGE === 'inicio') initHomeFilterAndRotator();
+  if (PAGE === 'conoce') renderSecciones();
+  if (PAGE === 'planifica') initPlan();
+});
+
+/* ====== Tema, menú y barra superior ====== */
+function initUI() {
+  const root = document.documentElement;
+  const themeBtn = $('#theme');
+  const paintIcon = () => { if (themeBtn) themeBtn.textContent = root.dataset.theme === 'dark' ? '☀️' : '🌙'; };
+  paintIcon();
+  themeBtn?.addEventListener('click', () => {
+    root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', root.dataset.theme);
+    paintIcon();
+    // repintar mapa si existe (el contenedor cambia de color)
+    if (window.map?.invalidateSize) window.map.invalidateSize();
+  });
+
+  // Marca la página activa
+  document.querySelectorAll('#menu a[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === PAGE));
+
+  // Menú móvil
+  const menu = $('#menu'), scrim = $('#scrim'), burger = $('#burger');
+  const toggleMenu = open => { menu?.classList.toggle('open', open); scrim?.classList.toggle('on', open); };
+  burger?.addEventListener('click', () => toggleMenu(!menu.classList.contains('open')));
+  scrim?.addEventListener('click', () => toggleMenu(false));
+
+  // Ocultar barra al bajar, mostrar al subir
+  const topbar = $('#topbar');
+  let lastY = scrollY;
+  addEventListener('scroll', () => {
+    if (!topbar) return;
+    topbar.classList.toggle('hidden', scrollY > lastY && scrollY > 120 && !menu?.classList.contains('open'));
+    lastY = scrollY;
+  }, { passive: true });
+
+  // "Ver más" de las descripciones
+  document.addEventListener('click', e => {
+    if (e.target.matches('.more')) {
+      const d = e.target.previousElementSibling;
+      const o = d.classList.toggle('open');
+      e.target.textContent = o ? 'Ver menos' : 'Ver más';
+    }
+  });
 }
 
 /* ====== Tarjeta ====== */
 function card(p, withMore = true, highlightColor = null) {
   const cColor = highlightColor || catColor(p.categoria);
   const imgs = (p.imagenes || []).map(s => `<img src="${esc(s)}" alt="${esc(p.nombre)}" loading="lazy" onerror="this.remove()">`).join('');
-  const osmUrl = `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lng}#map=16/${p.lat}/${p.lng}`;
+  const osmUrl = `[openstreetmap.org](https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lng}#map=16/${p.lat}/${p.lng})`;
   const tagsHtml = [
     `<span class="tag" style="--pill-color:${esc(catColor(p.categoria))}">${esc(catName(p.categoria))}</span>`,
     ...(p.etiquetas || []).map(t => `<span class="tag" style="--pill-color:${esc(tagColor(t, p.categoria))}">${esc(t)}</span>`)
@@ -43,130 +92,96 @@ function card(p, withMore = true, highlightColor = null) {
       ${p.cuando ? `<div class="when">${esc(p.cuando)}${p.repite ? ' · ' + esc(p.repite) : ''}</div>` : ''}
       <p class="desc">${linkify(p.descripcion)}</p>
       ${withMore ? '<button class="more" type="button">Ver más</button>' : ''}
-      <div class="links"><a href="${osmUrl}" target="_blank" rel="noopener">Ver en mapa</a>${p.web ? `<a href="${esc(p.web)}" target="_blank" rel="noopener">Web oficial</a>` : ''}</div>
+      <div class="links"><a href="${osmUrl}" target="_blank" rel="noopener">Ver en mapa</a>${p.web ? `<a href="${esc(encodeURI(decodeURI(p.web)))}" target="_blank" rel="noopener">Web oficial</a>` : ''}</div>
     </div></article>`;
 }
 
-document.addEventListener('click', e => {
-  if (e.target.matches('.more')) {
-    const d = e.target.previousElementSibling;
-    const o = d.classList.toggle('open');
-    e.target.textContent = o ? 'Ver menos' : 'Ver más';
-  }
-});
-
-/* ====== Inicio: Etiquetas activas solo si hay POIs, rotación aleatoria y color ====== */
+/* ====== Inicio ====== */
 function getAvailableFilters() {
-  if (!DATA.pois || DATA.pois.length === 0) return [];
   const map = new Map();
-
-  DATA.pois.forEach(p => {
+  (DATA.pois || []).forEach(p => {
     const c = catObj(p.categoria);
     if (c && !map.has(`cat:${c.id}`)) {
-      map.set(`cat:${c.id}`, {
-        label: c.nombre,
-        color: c.color || '#C8102E',
-        filterFn: item => item.categoria === c.id
-      });
+      map.set(`cat:${c.id}`, { label: c.nombre, color: c.color || '#C8102E', filterFn: i => i.categoria === c.id });
     }
     (p.etiquetas || []).forEach(tag => {
-      const key = `tag:${tag}`;
-      if (!map.has(key)) {
-        map.set(key, {
-          label: tag,
-          color: tagColor(tag, p.categoria),
-          filterFn: item => (item.etiquetas || []).includes(tag)
-        });
+      if (!map.has(`tag:${tag}`)) {
+        map.set(`tag:${tag}`, { label: tag, color: tagColor(tag, p.categoria), filterFn: i => (i.etiquetas || []).includes(tag) });
       }
     });
   });
-
-  return Array.from(map.values());
+  return [...map.values()];
 }
 
 function initHomeFilterAndRotator() {
-  const wrap = $('#inicio-pois-wrap');
-  const el = $('#rot');
-  const previews = $('#previews');
+  const wrap = $('#inicio-pois-wrap'), el = $('#rot'), previews = $('#previews');
+  if (!wrap || !el || !previews) return;
   const filters = getAvailableFilters();
-
-  if (!filters.length) {
-    wrap.hidden = true;
-    wrap.innerHTML = '';
-    return;
-  }
-
+  if (!filters.length) { wrap.hidden = true; return; }
   wrap.hidden = false;
   let currentIdx = -1;
 
-  const applyFilter = (idx) => {
+  const applyFilter = idx => {
     currentIdx = idx;
     const f = filters[idx];
     el.textContent = f.label.toLowerCase();
     el.style.setProperty('--tag-color', f.color);
-
-    const matchingPois = DATA.pois.filter(f.filterFn).slice(0, 4);
+    const matching = DATA.pois.filter(f.filterFn).slice(0, 4);
     previews.innerHTML = `<div class="prev" style="--tag-color:${esc(f.color)}">
       <h3>${esc(f.label)}</h3>
-      <div class="rail">${matchingPois.map(p => card(p, false, f.color)).join('')}</div>
+      <div class="rail">${matching.map(p => card(p, false, f.color)).join('')}</div>
     </div>`;
   };
 
   const pickRandomIndex = () => {
     if (filters.length === 1) return 0;
-    let next;
-    do {
-      next = Math.floor(Math.random() * filters.length);
-    } while (next === currentIdx);
-    return next;
+    let n;
+    do { n = Math.floor(Math.random() * filters.length); } while (n === currentIdx);
+    return n;
   };
 
   applyFilter(pickRandomIndex());
-
   if (filters.length > 1) {
     setInterval(() => {
       el.classList.add('out');
-      setTimeout(() => {
-        applyFilter(pickRandomIndex());
-        el.classList.remove('out');
-      }, 400);
+      setTimeout(() => { applyFilter(pickRandomIndex()); el.classList.remove('out'); }, 400);
     }, ROTATE_MS);
   }
 }
 
-/* ====== Conoce República Dominicana ====== */
+/* ====== Conoce ====== */
 function renderSecciones() {
-  if (!DATA.pois || DATA.pois.length === 0) {
-    $('#secciones').innerHTML = '';
-    return;
-  }
-  $('#secciones').innerHTML = DATA.categorias.map(c => {
+  const cont = $('#secciones');
+  if (!cont) return;
+  cont.innerHTML = DATA.categorias.map(c => {
     const l = DATA.pois.filter(p => p.categoria === c.id);
     if (!l.length) return '';
-    return `<section class="sec" id="${c.seccion}" style="--cat-color:${esc(c.color || '#C8102E')}">
+    return `<section class="sec" id="${esc(c.seccion)}" style="--cat-color:${esc(c.color || '#C8102E')}">
       <h2>${esc(c.nombre)}</h2>
       <div class="grid">${l.map((p, i) => i < 3 ? card(p) : card(p).replace('<article', '<article hidden data-extra')).join('')}</div>
-      ${l.length > 3 ? '<button class="btn alt show-more">Ver más</button>' : ''}
+      ${l.length > 3 ? '<button class="btn alt show-more" type="button">Ver más</button>' : ''}
     </section>`;
   }).join('');
 
-  $('#secciones').addEventListener('click', e => {
+  cont.addEventListener('click', e => {
     if (!e.target.matches('.show-more')) return;
     const sec = e.target.closest('.sec');
-    const hid = sec.querySelectorAll('[data-extra]');
     const open = e.target.dataset.open !== '1';
-    hid.forEach(h => h.hidden = !open);
+    sec.querySelectorAll('[data-extra]').forEach(h => h.hidden = !open);
     e.target.dataset.open = open ? '1' : '';
     e.target.textContent = open ? 'Ver menos' : 'Ver más';
   });
+
+  // Si se llega con conoce.html#monumentos, desplazarse a la sección
+  if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
 }
 
 /* ====== Planifica (Leaflet + OpenStreetMap) ====== */
-let map, routeLayer, markers = {}, selected = new Set(), activeTags = new Set(), mapsReady = false;
+let map, routeLayer, markers = {}, selected = new Set(), activeTags = new Set();
 
 function initPlan() {
   const usedCats = DATA.categorias.filter(c => DATA.pois.some(p => p.categoria === c.id));
-  $('#chips').innerHTML = usedCats.map(c => `<button class="chip" data-c="${c.id}">${esc(c.nombre)}</button>`).join('');
+  $('#chips').innerHTML = usedCats.map(c => `<button class="chip" type="button" data-c="${esc(c.id)}">${esc(c.nombre)}</button>`).join('');
   $('#chips').addEventListener('click', e => {
     if (!e.target.matches('.chip')) return;
     const c = e.target.dataset.c;
@@ -175,15 +190,15 @@ function initPlan() {
     renderLista();
   });
   $('#q').addEventListener('input', renderLista);
-  $('#auto').onclick = () => {
+  $('#auto').addEventListener('click', () => {
     if (!activeTags.size) return alert('Elige al menos una etiqueta.');
     DATA.pois.filter(p => activeTags.has(p.categoria)).forEach(p => selected.add(p.id));
     renderLista();
     drawRoute();
-  };
-  $('#ruta').onclick = drawRoute;
+  });
+  $('#ruta').addEventListener('click', drawRoute);
   renderLista();
-  loadMaps();
+  setupMap();
 }
 
 function filtered() {
@@ -193,137 +208,75 @@ function filtered() {
 }
 
 function renderLista() {
-  $('#lista').innerHTML = filtered().map(p => `<li data-id="${p.id}">
+  const lista = $('#lista');
+  lista.innerHTML = filtered().map(p => `<li data-id="${esc(p.id)}">
     <input type="checkbox" ${selected.has(p.id) ? 'checked' : ''} aria-label="Añadir ${esc(p.nombre)}">
     ${p.imagenes?.[0] ? `<img src="${esc(p.imagenes[0])}" alt="" onerror="this.remove()">` : ''}
     <span><strong>${esc(p.nombre)}</strong><br><small>${esc(catName(p.categoria))}</small></span></li>`).join('') || '<li>Sin resultados.</li>';
 
-  document.querySelectorAll('#lista li[data-id]').forEach(li => {
+  lista.querySelectorAll('li[data-id]').forEach(li => {
     const id = li.dataset.id;
+    const cb = li.querySelector('input');
     li.addEventListener('click', e => {
-      if (e.target.type !== 'checkbox') {
-        const cb = li.querySelector('input');
-        cb.checked = !cb.checked;
-      }
-      selected[li.querySelector('input').checked ? 'add' : 'delete'](id);
+      if (e.target !== cb) cb.checked = !cb.checked;
+      cb.checked ? selected.add(id) : selected.delete(id);
     });
     li.addEventListener('mouseenter', () => {
       const p = DATA.pois.find(x => x.id === id);
       $('#info').textContent = p.descripcion;
-      showInfo(id);
+      markers[id]?.openPopup();
     });
   });
 }
 
-function loadMaps() {
-  // Inyecta el CSS de Leaflet si no está ya en el HTML
-  if (!document.querySelector('link[href*="leaflet.css"]')) {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
-    document.head.appendChild(link);
+function setupMap() {
+  const mapEl = $('#map');
+  if (!window.L) {
+    $('#mapmsg').textContent = 'No se pudo cargar el mapa de OpenStreetMap. Revisa tu conexión a internet.';
+    return;
   }
+  mapEl.innerHTML = '';
+  map = L.map(mapEl).setView([18.9, -70.2], 8);
+  window.map = map;
 
-  const setupLeaflet = () => {
-    mapsReady = true;
-    const mapEl = $('#map');
-    mapEl.innerHTML = '';
-    mapEl.style.display = 'block';
-    mapEl.style.zIndex = '1';
+  L.tileLayer('[tile.openstreetmap.org](https://tile.openstreetmap.org/{z}/{x}/{y}.png)', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="[openstreetmap.org](https://www.openstreetmap.org/copyright)">OpenStreetMap</a>'
+  }).addTo(map);
 
-    map = L.map(mapEl).setView([18.9, -70.2], 8);
+  routeLayer = L.layerGroup().addTo(map);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  DATA.pois.forEach(p => {
+    const marker = L.circleMarker([p.lat, p.lng], {
+      radius: 9, fillColor: catColor(p.categoria), color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
     }).addTo(map);
-
-    routeLayer = L.layerGroup().addTo(map);
-
-    DATA.pois.forEach(p => {
-      const marker = L.circleMarker([p.lat, p.lng], {
-        radius: 9,
-        fillColor: catColor(p.categoria),
-        color: '#ffffff',
-        weight: 2,
-        opacity: 1,
-        fillOpacity: 1
-      }).addTo(map);
-
-      marker.bindPopup(
-        `<div style="max-width:240px;color:#2B2B2B">
-          <strong>${esc(p.nombre)}</strong>
-          <p style="margin:.3rem 0 0">${esc(p.descripcion)}</p>
-        </div>`
-      );
-
-      marker.on('mouseover', () => marker.openPopup());
-      marker.on('click', () => {
-        selected.has(p.id) ? selected.delete(p.id) : selected.add(p.id);
-        renderLista();
-      });
-
-      markers[p.id] = marker;
+    marker.bindPopup(`<div style="max-width:240px;color:#2B2B2B"><strong>${esc(p.nombre)}</strong><p style="margin:.3rem 0 0">${esc(p.descripcion)}</p></div>`);
+    marker.on('mouseover', () => marker.openPopup());
+    marker.on('click', () => {
+      selected.has(p.id) ? selected.delete(p.id) : selected.add(p.id);
+      renderLista();
     });
-  };
-
-  if (window.L) {
-    setupLeaflet();
-  } else {
-    const s = document.createElement('script');
-    s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    s.async = true;
-    s.onload = setupLeaflet;
-    s.onerror = () => {
-      $('#mapmsg').textContent = 'No se pudo cargar el mapa de OpenStreetMap. Revisa tu conexión a internet.';
-    };
-    document.head.appendChild(s);
-  }
-}
-
-function showInfo(id) {
-  if (!mapsReady || !markers[id]) return;
-  markers[id].openPopup();
+    markers[p.id] = marker;
+  });
 }
 
 async function drawRoute() {
-  if (!mapsReady) return;
+  if (!map) return;
   const pts = DATA.pois.filter(p => selected.has(p.id));
   if (pts.length < 2) return alert('Elige al menos 2 lugares para trazar la ruta.');
-
   routeLayer.clearLayers();
-  const coordsQuery = pts.map(p => `${p.lng},${p.lat}`).join(';');
+  const coords = pts.map(p => `${p.lng},${p.lat}`).join(';');
 
   try {
-    // Servicio público de rutas por carretera OSRM para OpenStreetMap
-    const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coordsQuery}?overview=full&geometries=geojson`);
+    const res = await fetch(`[router.project-osrm.org](https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson)`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
-
-    if (data.code === 'Ok' && data.routes?.length) {
-      const latLngs = data.routes[0].geometry.coordinates.map(([lng, lat]) => [lat, lng]);
-      const polyline = L.polyline(latLngs, { color: '#1F4E9C', weight: 5, opacity: 0.85 }).addTo(routeLayer);
-      map.fitBounds(polyline.getBounds(), { padding: [40, 40] });
-    } else {
-      throw new Error('Ruta no disponible');
-    }
+    if (data.code !== 'Ok' || !data.routes?.length) throw new Error('Ruta no disponible');
+    const latLngs = data.routes[0].geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+    const line = L.polyline(latLngs, { color: '#1F4E9C', weight: 5, opacity: .85 }).addTo(routeLayer);
+    map.fitBounds(line.getBounds(), { padding: [40, 40] });
   } catch (_) {
-    // Respaldo: trazar línea directa conectando los puntos si OSRM no encuentra carretera
-    const latLngs = pts.map(p => [p.lat, p.lng]);
-    const polyline = L.polyline(latLngs, { color: '#C8102E', weight: 4, dashArray: '8, 8' }).addTo(routeLayer);
-    map.fitBounds(polyline.getBounds(), { padding: [40, 40] });
+    const line = L.polyline(pts.map(p => [p.lat, p.lng]), { color: '#C8102E', weight: 4, dashArray: '8, 8' }).addTo(routeLayer);
+    map.fitBounds(line.getBounds(), { padding: [40, 40] });
   }
 }
-
-/* ====== Vuelo (simulado) ====== */
-$('#vueloForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const f = new FormData(e.target);
-  const opciones = [['07:30', 549], ['13:10', 612], ['22:45', 478]].map(([h, pr]) => `<div class="res"><span><strong>${esc(f.get('o'))} → ${esc(f.get('d'))}</strong><br>${esc(f.get('i'))} · ${h}</span><strong>${pr * f.get('p')} €</strong></div>`).join('');
-  $('#vueloRes').innerHTML = opciones;
-});
-
-/* ====== Router, menú y tema ====== */
-const topbar = $('#topbar');
-function route() {
-  const v = (location.hash.slice(1) || 'inicio');
-  const view = ['inicio', 'conoce', 'planifica', '

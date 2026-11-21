@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conoce República Dominicana</title>
+  <link rel="preconnect" href="[fonts.googleapis.com](https://fonts.googleapis.com)">
+  <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Fraunces:wght@600;800&family=Instrument+Sans:wght@400;600&display=swap)" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('theme') || 'light';</script>
+  <script src="app.js" defer></script>
+</head>
+<body data-page="conoce">
+  <header id="topbar">
+    <button id="burger" type="button" aria-label="Abrir menú">☰</button>
+    <ul id="menu">
+      <li><a href="index.html" class="logo" aria-label="Inicio"><span class="flag"></span></a></li>
+      <li><a href="index.html" data-nav="inicio">Inicio</a></li>
+      <li><a href="conoce.html" data-nav="conoce">Conoce RD</a></li>
+      <li><a href="planifica.html" data-nav="planifica">Planifica</a></li>
+      <li><a href="[booking.com](https://www.booking.com/flights/)" target="_blank" rel="noopener">Planea tu vuelo</a></li>
+    </ul>
+    <button id="theme" type="button" aria-label="Cambiar tema">🌙</button>
+  </header>
+  <div id="scrim"></div>
+
+  <main class="wrap">
+    <h1 class="page-title">Conoce República Dominicana</h1>
+    <div id="secciones"></div>
+  </main>
+
+  <footer>© República Dominicana · Guía de viaje</footer>
+</body>
+</html>

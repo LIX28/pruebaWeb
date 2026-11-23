@@ -59,7 +59,22 @@
     "Historia": "#C8102E",
     "Zona Colonial": "#1F4E9C",
     "Carnaval": "#6A1B9A",
-    "Cultura popular": "#D35400"
+    "Cultura popular": "#D35400",
+    "Playa": "#00838F",
+    "Naturaleza": "#1E824C",
+    "Aventura": "#D35400",
+    "Religión": "#6A1B9A",
+    "Tradición": "#AD1457",
+    "Gastronomía": "#D35400",
+    "Música": "#AD1457",
+    "Arte": "#6A1B9A",
+    "Libros": "#4E342E",
+    "Deporte": "#1F4E9C",
+    "Familia": "#1E824C",
+    "Fiesta nacional": "#C8102E",
+    "Cascadas": "#1F4E9C",
+    "Cuevas": "#4E342E",
+    "Patrimonio": "#C8102E"
   },
   "pois": [
     {
@@ -118,6 +133,2034 @@
         "imagen/carnaval-vega1.jpg",
         "imagen/carnaval-vega2.jpg"
       ]
+    },
+    {
+      "id": "fortaleza-ozama",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Fortaleza Ozama",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Fortificación militar de comienzos del siglo XVI junto al río Ozama, considerada una de las más antiguas de América. Su Torre del Homenaje vigilaba la entrada al puerto.",
+      "lat": 18.4789,
+      "lng": -69.8823
+    },
+    {
+      "id": "faro-a-colon",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia"
+      ],
+      "nombre": "Faro a Colón",
+      "ciudad": "Santo Domingo Este",
+      "descripcion": "Gran mausoleo en forma de cruz inaugurado en 1992 con motivo del quinto centenario del primer viaje de Colón. Alberga un museo y, según la tradición dominicana, los restos del almirante.",
+      "lat": 18.48,
+      "lng": -69.859
+    },
+    {
+      "id": "altar-de-la-patria",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Fiesta nacional"
+      ],
+      "nombre": "Altar de la Patria",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Mausoleo de mármol en el parque Independencia donde reposan Duarte, Sánchez y Mella, fundadores de la República.",
+      "lat": 18.4727,
+      "lng": -69.8914
+    },
+    {
+      "id": "puerta-del-conde",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia"
+      ],
+      "nombre": "Puerta del Conde",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Antigua puerta de la muralla donde se proclamó la independencia dominicana el 27 de febrero de 1844. Marca el extremo oeste de la calle El Conde.",
+      "lat": 18.4722,
+      "lng": -69.8903
+    },
+    {
+      "id": "panteon-nacional",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Panteón Nacional",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Antigua iglesia jesuita del siglo XVIII, reconvertida en panteón de personajes ilustres de la historia dominicana. Se encuentra en la calle Las Damas.",
+      "lat": 18.4757,
+      "lng": -69.8832
+    },
+    {
+      "id": "ruinas-monasterio-san-francisco",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Ruinas del Monasterio de San Francisco",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Restos del que se considera el primer monasterio de América, levantado a comienzos del siglo XVI. Sus muros sin techo se usan hoy para conciertos y actos al aire libre.",
+      "lat": 18.4765,
+      "lng": -69.8858
+    },
+    {
+      "id": "ruinas-hospital-san-nicolas",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Ruinas del Hospital San Nicolás de Bari",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Ruinas del que se considera el primer hospital de piedra de América, de principios del siglo XVI. Se conservan parte de sus arcadas.",
+      "lat": 18.4772,
+      "lng": -69.8855
+    },
+    {
+      "id": "calle-las-damas",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Calle Las Damas",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Considerada la primera calle trazada del Nuevo Mundo. Reúne el Panteón Nacional, el Museo de las Casas Reales y otros edificios coloniales, y termina en la Fortaleza Ozama.",
+      "lat": 18.477,
+      "lng": -69.883
+    },
+    {
+      "id": "casa-del-cordon",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Casa del Cordón",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Una de las primeras casas de piedra de América, de principios del siglo XVI. Debe su nombre al cordón franciscano esculpido sobre su portada.",
+      "lat": 18.477,
+      "lng": -69.8842
+    },
+    {
+      "id": "convento-dominico",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Religión",
+        "Zona Colonial"
+      ],
+      "nombre": "Convento de los Dominicos",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Conjunto religioso del siglo XVI vinculado a los orígenes de la primera universidad del Nuevo Mundo, fundada por los dominicos en 1538.",
+      "lat": 18.474,
+      "lng": -69.8859
+    },
+    {
+      "id": "iglesia-santa-barbara",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Religión",
+        "Zona Colonial"
+      ],
+      "nombre": "Iglesia de Santa Bárbara",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Iglesia colonial construida a partir de 1562 en el barrio de Santa Bárbara, junto a un antiguo fuerte de la ciudad.",
+      "lat": 18.4797,
+      "lng": -69.886
+    },
+    {
+      "id": "iglesia-las-mercedes",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Religión",
+        "Zona Colonial"
+      ],
+      "nombre": "Iglesia de Nuestra Señora de las Mercedes",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Uno de los templos más antiguos y bellos de la Ciudad Colonial, junto al antiguo convento mercedario.",
+      "lat": 18.4748,
+      "lng": -69.8877
+    },
+    {
+      "id": "puerta-de-la-misericordia",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Fiesta nacional"
+      ],
+      "nombre": "Puerta de la Misericordia",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Antigua puerta de la muralla donde, en la noche del 27 de febrero de 1844, Ramón Matías Mella disparó el trabucazo que dio inicio a la independencia.",
+      "lat": 18.4728,
+      "lng": -69.8925
+    },
+    {
+      "id": "casa-de-francia",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Casa de Francia",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Edificio colonial de la calle Las Damas que hoy acoge el centro cultural de Francia, con exposiciones y actividades.",
+      "lat": 18.4775,
+      "lng": -69.8831
+    },
+    {
+      "id": "palacio-nacional",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia"
+      ],
+      "nombre": "Palacio Nacional",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Sede de la Presidencia de la República, edificio neoclásico del siglo XX coronado por una gran cúpula.",
+      "lat": 18.4745,
+      "lng": -69.9065
+    },
+    {
+      "id": "fortaleza-san-felipe",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia"
+      ],
+      "nombre": "Fortaleza San Felipe",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Fortaleza del siglo XVI levantada para defender Puerto Plata de piratas y corsarios. Hoy es museo y mirador frente al Atlántico.",
+      "lat": 19.8015,
+      "lng": -70.692
+    },
+    {
+      "id": "basilica-altagracia",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Religión",
+        "Historia"
+      ],
+      "nombre": "Basílica de Nuestra Señora de la Altagracia",
+      "ciudad": "Higüey",
+      "descripcion": "Santuario de la Virgen de la Altagracia, patrona del país, inaugurado en 1971. Su gran arco de hormigón es inconfundible y recibe peregrinos cada 21 de enero.",
+      "lat": 18.6153,
+      "lng": -68.7075
+    },
+    {
+      "id": "catedral-santiago",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Religión",
+        "Historia"
+      ],
+      "nombre": "Catedral de Santiago Apóstol",
+      "ciudad": "Santiago",
+      "descripcion": "Catedral de Santiago de los Caballeros frente al parque Duarte, corazón del centro histórico de la ciudad.",
+      "lat": 19.4507,
+      "lng": -70.6957
+    },
+    {
+      "id": "parque-historico-la-isabela",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Naturaleza"
+      ],
+      "nombre": "Parque Histórico La Isabela",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Lugar del primer asentamiento europeo estable de América, fundado por Colón entre 1493 y 1494. Conserva ruinas y un pequeño museo junto al mar.",
+      "lat": 19.8983,
+      "lng": -71.0081
+    },
+    {
+      "id": "monumento-heroes-restauracion",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Fiesta nacional"
+      ],
+      "nombre": "Monumento a los Héroes de la Restauración",
+      "ciudad": "Santiago",
+      "descripcion": "Gran torre blanca que domina Santiago y homenajea a los héroes de la guerra de la Restauración. Tiene mirador con vistas a la ciudad.",
+      "lat": 19.4552,
+      "lng": -70.6925
+    },
+    {
+      "id": "parque-central-puerto-plata",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia",
+        "Arte"
+      ],
+      "nombre": "Parque Central de Puerto Plata",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Plaza del centro histórico con un quiosco de estilo victoriano, rodeada de casas de madera de ese estilo y de la catedral.",
+      "lat": 19.7937,
+      "lng": -70.6918
+    },
+    {
+      "id": "casa-ponce-de-leon",
+      "categoria": "monumento",
+      "etiquetas": [
+        "Historia"
+      ],
+      "nombre": "Casa de Ponce de León",
+      "ciudad": "Higüey",
+      "descripcion": "Vivienda del siglo XVI en San Rafael de Yuma, asociada a Juan Ponce de León, conquistador de Puerto Rico y Florida.",
+      "lat": 18.41,
+      "lng": -68.63
+    },
+    {
+      "id": "playa-bavaro",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Familia"
+      ],
+      "nombre": "Playa Bávaro",
+      "ciudad": "Punta Cana",
+      "descripcion": "Larga franja de arena blanca y palmeras en la costa Atlántica, de aguas tranquilas protegidas por arrecife. Es el corazón turístico del este del país.",
+      "lat": 18.68,
+      "lng": -68.41
+    },
+    {
+      "id": "isla-saona",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Naturaleza"
+      ],
+      "nombre": "Isla Saona",
+      "ciudad": "Bayahibe",
+      "descripcion": "Isla del Parque Nacional del Este con playas de arena blanca, palmerales y piscinas naturales. Se visita en excursión en lancha o catamarán desde Bayahibe.",
+      "lat": 18.16,
+      "lng": -68.69
+    },
+    {
+      "id": "cayo-levantado",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Naturaleza"
+      ],
+      "nombre": "Cayo Levantado",
+      "ciudad": "Samaná",
+      "descripcion": "Pequeño islote de la bahía de Samaná con playa de arena blanca y palmeras. Se llega en barca desde Samaná.",
+      "lat": 19.193,
+      "lng": -69.162
+    },
+    {
+      "id": "los-haitises",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Naturaleza",
+        "Cuevas"
+      ],
+      "nombre": "Parque Nacional Los Haitises",
+      "ciudad": "Sabana de la Mar",
+      "descripcion": "Parque de manglares, islotes cubiertos de selva y cuevas con arte taíno junto a la bahía de Samaná. Se recorre en barca.",
+      "lat": 19.06,
+      "lng": -69.52
+    },
+    {
+      "id": "lago-enriquillo",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Naturaleza"
+      ],
+      "nombre": "Lago Enriquillo",
+      "ciudad": "Jimaní",
+      "descripcion": "El mayor lago del Caribe insular, de agua salada y situado por debajo del nivel del mar. Alberga una importante población de cocodrilo americano.",
+      "lat": 18.49,
+      "lng": -71.6
+    },
+    {
+      "id": "bahia-de-las-aguilas",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Naturaleza"
+      ],
+      "nombre": "Bahía de las Águilas",
+      "ciudad": "Pedernales",
+      "descripcion": "Playa virgen de aguas turquesas en el Parque Nacional Jaragua, sin construcciones ni servicios. Se accede en barca desde Cabo Rojo; conviene llevar agua y sombra.",
+      "lat": 17.8,
+      "lng": -71.66
+    },
+    {
+      "id": "pico-isabel-de-torres",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Naturaleza",
+        "Familia"
+      ],
+      "nombre": "Pico Isabel de Torres",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Montaña de unos 800 m sobre Puerto Plata con teleférico, jardín botánico y una estatua del Cristo Redentor en la cima.",
+      "lat": 19.76,
+      "lng": -70.72
+    },
+    {
+      "id": "cabarete",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Aventura"
+      ],
+      "nombre": "Cabarete",
+      "ciudad": "Cabarete",
+      "descripcion": "Pueblo de la costa norte famoso por el viento: kitesurf, windsurf y olas atraen a deportistas de todo el mundo.",
+      "lat": 19.75,
+      "lng": -70.41
+    },
+    {
+      "id": "las-terrenas",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa"
+      ],
+      "nombre": "Las Terrenas",
+      "ciudad": "Las Terrenas",
+      "descripcion": "Pueblo de la costa norte de Samaná con playas de palmeras, ambiente internacional y buena oferta de restaurantes.",
+      "lat": 19.31,
+      "lng": -69.54
+    },
+    {
+      "id": "los-tres-ojos",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Naturaleza",
+        "Cuevas",
+        "Familia"
+      ],
+      "nombre": "Los Tres Ojos",
+      "ciudad": "Santo Domingo Este",
+      "descripcion": "Parque de cuevas calizas con lagos subterráneos de agua dulce. Se baja entre estalactitas y se cruza en barca uno de los lagos.",
+      "lat": 18.485,
+      "lng": -69.817
+    },
+    {
+      "id": "constanza",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Naturaleza"
+      ],
+      "nombre": "Valle de Constanza",
+      "ciudad": "Constanza",
+      "descripcion": "Valle de montaña a más de 1.000 m de altitud, de clima fresco, famoso por sus cultivos de fresas, hortalizas y flores.",
+      "lat": 18.91,
+      "lng": -70.75
+    },
+    {
+      "id": "boca-chica",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Familia"
+      ],
+      "nombre": "Playa de Boca Chica",
+      "ciudad": "Boca Chica",
+      "descripcion": "Playa de aguas poco profundas y tranquilas a media hora de Santo Domingo, muy popular los fines de semana.",
+      "lat": 18.4497,
+      "lng": -69.6049
+    },
+    {
+      "id": "isla-catalina",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Naturaleza"
+      ],
+      "nombre": "Isla Catalina",
+      "ciudad": "La Romana",
+      "descripcion": "Islote cercano a La Romana con arrecifes ideales para hacer snorkel y buceo.",
+      "lat": 18.35,
+      "lng": -68.99
+    },
+    {
+      "id": "sosua",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa"
+      ],
+      "nombre": "Bahía de Sosúa",
+      "ciudad": "Sosúa",
+      "descripcion": "Bahía de aguas calmadas en la costa norte, con playa en pleno pueblo y buenas opciones de buceo.",
+      "lat": 19.755,
+      "lng": -70.51
+    },
+    {
+      "id": "juan-dolio",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Familia"
+      ],
+      "nombre": "Juan Dolio",
+      "ciudad": "Juan Dolio",
+      "descripcion": "Playa de ambiente familiar en la costa sur, al este de Boca Chica.",
+      "lat": 18.42,
+      "lng": -69.43
+    },
+    {
+      "id": "salto-jimenoa-uno",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Naturaleza",
+        "Cascadas"
+      ],
+      "nombre": "Salto de Jimenoa Uno",
+      "ciudad": "Jarabacoa",
+      "descripcion": "Gran cascada del río Jimenoa rodeada de bosque de montaña, con una poza para bañarse.",
+      "lat": 19.09,
+      "lng": -70.635
+    },
+    {
+      "id": "valle-nuevo",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Naturaleza"
+      ],
+      "nombre": "Valle Nuevo",
+      "ciudad": "Constanza",
+      "descripcion": "Parque nacional de altura con pinares y praderas, de los lugares más fríos del país, donde en invierno pueden darse heladas.",
+      "lat": 18.77,
+      "lng": -70.62
+    },
+    {
+      "id": "playa-grande",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa"
+      ],
+      "nombre": "Playa Grande",
+      "ciudad": "Río San Juan",
+      "descripcion": "Playa amplia de arena clara y olas, entre acantilados, en la costa norte cerca de Río San Juan.",
+      "lat": 19.66,
+      "lng": -69.99
+    },
+    {
+      "id": "las-galeras",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Naturaleza"
+      ],
+      "nombre": "Las Galeras",
+      "ciudad": "Samaná",
+      "descripcion": "Pequeño pueblo en la punta noreste de Samaná, rodeado de playas tranquilas y calas.",
+      "lat": 19.29,
+      "lng": -69.188
+    },
+    {
+      "id": "playa-coson",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa"
+      ],
+      "nombre": "Playa Cosón",
+      "ciudad": "Las Terrenas",
+      "descripcion": "Larga playa de arena clara y cocoteros al este de Las Terrenas.",
+      "lat": 19.33,
+      "lng": -69.48
+    },
+    {
+      "id": "playa-dominicus",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Familia"
+      ],
+      "nombre": "Playa Dominicus",
+      "ciudad": "Bayahibe",
+      "descripcion": "Playa de aguas tranquilas junto a Bayahibe, punto de partida habitual de excursiones a la isla Saona.",
+      "lat": 18.36,
+      "lng": -68.84
+    },
+    {
+      "id": "bahia-de-samana",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Naturaleza"
+      ],
+      "nombre": "Bahía de Samaná",
+      "ciudad": "Samaná",
+      "descripcion": "Bahía abrigada a la que llegan de enero a marzo las ballenas jorobadas para reproducirse.",
+      "lat": 19.15,
+      "lng": -69.3
+    },
+    {
+      "id": "playa-dorada",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Familia"
+      ],
+      "nombre": "Playa Dorada",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Zona turística de Puerto Plata con playa, campo de golf y complejos hoteleros.",
+      "lat": 19.797,
+      "lng": -70.646
+    },
+    {
+      "id": "playa-fronton",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Naturaleza"
+      ],
+      "nombre": "Playa Frontón",
+      "ciudad": "Samaná",
+      "descripcion": "Playa casi virgen entre acantilados cerca de Las Galeras, accesible en barca o por sendero.",
+      "lat": 19.3,
+      "lng": -69.163
+    },
+    {
+      "id": "playa-juanillo",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa"
+      ],
+      "nombre": "Playa Juanillo",
+      "ciudad": "Punta Cana",
+      "descripcion": "Playa de arena blanca y aguas tranquilas en Cap Cana, al sur de Punta Cana.",
+      "lat": 18.495,
+      "lng": -68.38
+    },
+    {
+      "id": "playa-bonita",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa"
+      ],
+      "nombre": "Playa Bonita",
+      "ciudad": "Las Terrenas",
+      "descripcion": "Playa de arena y palmeras al este de Las Terrenas, con oleaje suave y ambiente tranquilo.",
+      "lat": 19.327,
+      "lng": -69.513
+    },
+    {
+      "id": "playa-macao",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa"
+      ],
+      "nombre": "Playa Macao",
+      "ciudad": "Punta Cana",
+      "descripcion": "Playa pública de la costa Atlántica, con olas y arena clara, algo más salvaje que las de los resorts.",
+      "lat": 18.78,
+      "lng": -68.5
+    },
+    {
+      "id": "cabo-rojo",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Naturaleza"
+      ],
+      "nombre": "Cabo Rojo",
+      "ciudad": "Pedernales",
+      "descripcion": "Zona costera del suroeste, punto de salida de las barcas hacia Bahía de las Águilas.",
+      "lat": 17.93,
+      "lng": -71.65
+    },
+    {
+      "id": "playa-cofresi",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa"
+      ],
+      "nombre": "Playa Cofresí",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Playa al oeste de Puerto Plata, de ambiente tranquilo y buenas puestas de sol.",
+      "lat": 19.82,
+      "lng": -70.74
+    },
+    {
+      "id": "punta-rucia",
+      "categoria": "paisaje",
+      "etiquetas": [
+        "Playa",
+        "Naturaleza"
+      ],
+      "nombre": "Punta Rucia",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Zona de playas y manglares de la costa noroeste, desde donde parten excursiones en barca a cayos y arrecifes.",
+      "lat": 19.894,
+      "lng": -70.942
+    },
+    {
+      "id": "pico-duarte",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Aventura",
+        "Naturaleza"
+      ],
+      "nombre": "Pico Duarte",
+      "ciudad": "Jarabacoa",
+      "descripcion": "La mayor altura del Caribe, de unos 3.100 m. La ruta clásica se hace en varios días con guía y permiso, entre pinares y bosque nublado.",
+      "lat": 19.0231,
+      "lng": -70.9986
+    },
+    {
+      "id": "salto-del-limon",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Aventura",
+        "Cascadas"
+      ],
+      "nombre": "Salto del Limón",
+      "ciudad": "Samaná",
+      "descripcion": "Cascada de unos 50 m en plena selva, a la que se llega a pie o a caballo por un sendero desde El Limón.",
+      "lat": 19.2917,
+      "lng": -69.412
+    },
+    {
+      "id": "27-charcos-damajagua",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Aventura",
+        "Cascadas"
+      ],
+      "nombre": "27 Charcos de Damajagua",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Circuito de pozas y cascadas en el río Damajagua que se recorre caminando, saltando y deslizándose, con casco y chaleco.",
+      "lat": 19.74,
+      "lng": -70.79
+    },
+    {
+      "id": "salto-baiguate",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza",
+        "Cascadas"
+      ],
+      "nombre": "Salto de Baiguate",
+      "ciudad": "Jarabacoa",
+      "descripcion": "Cascada en las afueras de Jarabacoa, a la que se llega por un corto sendero entre vegetación de montaña.",
+      "lat": 19.099,
+      "lng": -70.636
+    },
+    {
+      "id": "salto-jimenoa-dos",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza",
+        "Cascadas"
+      ],
+      "nombre": "Salto de Jimenoa Dos",
+      "ciudad": "Jarabacoa",
+      "descripcion": "Cascada del río Jimenoa que se contempla desde un puente colgante, en un entorno de bosque y roca.",
+      "lat": 19.09,
+      "lng": -70.648
+    },
+    {
+      "id": "salto-aguas-blancas",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Aventura",
+        "Cascadas"
+      ],
+      "nombre": "Salto de Aguas Blancas",
+      "ciudad": "Constanza",
+      "descripcion": "Una de las cascadas más altas del Caribe, en la sierra cercana a Constanza.",
+      "lat": 18.86,
+      "lng": -70.76
+    },
+    {
+      "id": "isla-cabritos",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza"
+      ],
+      "nombre": "Parque Nacional Isla Cabritos",
+      "ciudad": "Jimaní",
+      "descripcion": "Isla en medio del lago Enriquillo con iguanas rinoceronte, cocodrilos americanos y flamencos. Se visita en barca.",
+      "lat": 18.48,
+      "lng": -71.62
+    },
+    {
+      "id": "ebano-verde",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza"
+      ],
+      "nombre": "Reserva Científica Ébano Verde",
+      "ciudad": "Jarabacoa",
+      "descripcion": "Reserva de bosque nublado con especies endémicas, senderos cortos y miradores en la cordillera Central.",
+      "lat": 19.0,
+      "lng": -70.54
+    },
+    {
+      "id": "sierra-de-bahoruco",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza",
+        "Aventura"
+      ],
+      "nombre": "Parque Nacional Sierra de Bahoruco",
+      "ciudad": "Pedernales",
+      "descripcion": "Sierra del suroeste con pinares, bosque nublado y aves endémicas. Muy valorado por los observadores de aves.",
+      "lat": 18.2,
+      "lng": -71.58
+    },
+    {
+      "id": "parque-nacional-del-este",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza",
+        "Cuevas"
+      ],
+      "nombre": "Parque Nacional del Este",
+      "ciudad": "Bayahibe",
+      "descripcion": "Parque costero de bosque seco, senderos y cuevas con pictografías taínas, frente a la isla Saona.",
+      "lat": 18.31,
+      "lng": -68.78
+    },
+    {
+      "id": "el-morro-monte-cristi",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza",
+        "Aventura"
+      ],
+      "nombre": "El Morro de Monte Cristi",
+      "ciudad": "Monte Cristi",
+      "descripcion": "Mesa de piedra caliza que domina la costa de Monte Cristi. Un ascenso corto lleva a vistas amplias del litoral y el mar.",
+      "lat": 19.89,
+      "lng": -71.69
+    },
+    {
+      "id": "parque-mirador-sur",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza",
+        "Familia"
+      ],
+      "nombre": "Parque Mirador Sur",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Gran parque lineal de Santo Domingo para caminar, correr y montar en bici junto al acantilado, con vistas al mar Caribe.",
+      "lat": 18.45,
+      "lng": -69.945
+    },
+    {
+      "id": "jardin-botanico-nacional",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza",
+        "Familia"
+      ],
+      "nombre": "Jardín Botánico Nacional",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Extenso jardín de Santo Domingo con colecciones de plantas dominicanas, jardín japonés y recorrido en tren.",
+      "lat": 18.5,
+      "lng": -69.956
+    },
+    {
+      "id": "cuevas-del-pomier",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Cuevas",
+        "Historia"
+      ],
+      "nombre": "Cuevas del Pomier",
+      "ciudad": "San Cristóbal",
+      "descripcion": "Conjunto de cuevas con una de las mayores colecciones de arte rupestre taíno del Caribe.",
+      "lat": 18.49,
+      "lng": -70.09
+    },
+    {
+      "id": "parque-nacional-jaragua",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza"
+      ],
+      "nombre": "Parque Nacional Jaragua",
+      "ciudad": "Pedernales",
+      "descripcion": "El parque nacional más extenso del país: litoral, bosque seco, lagunas y aves como el flamenco.",
+      "lat": 17.8,
+      "lng": -71.45
+    },
+    {
+      "id": "laguna-dudu",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza",
+        "Aventura"
+      ],
+      "nombre": "Laguna Dudú",
+      "ciudad": "Cabrera",
+      "descripcion": "Laguna de agua dulce de color azul en una cavidad de roca caliza, cerca de Cabrera. Se puede nadar y saltar desde las rocas.",
+      "lat": 19.633,
+      "lng": -69.9
+    },
+    {
+      "id": "armando-bermudez",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza",
+        "Aventura"
+      ],
+      "nombre": "Parque Nacional Armando Bermúdez",
+      "ciudad": "Jarabacoa",
+      "descripcion": "Parque de alta montaña de la cordillera Central, con bosques de pino y puerta de entrada de una de las rutas al pico Duarte.",
+      "lat": 19.05,
+      "lng": -70.9
+    },
+    {
+      "id": "laguna-de-oviedo",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza"
+      ],
+      "nombre": "Laguna de Oviedo",
+      "ciudad": "Pedernales",
+      "descripcion": "Laguna del Parque Nacional Jaragua, hábitat de flamencos y otras aves acuáticas.",
+      "lat": 17.81,
+      "lng": -71.39
+    },
+    {
+      "id": "sierra-de-neiba",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Naturaleza"
+      ],
+      "nombre": "Parque Nacional Sierra de Neiba",
+      "ciudad": "Neiba",
+      "descripcion": "Sierra de la zona suroeste con bosque seco y húmedo, poco visitada y buena para los amantes de la naturaleza.",
+      "lat": 18.63,
+      "lng": -71.4
+    },
+    {
+      "id": "rio-yaque-del-norte",
+      "categoria": "senderismo",
+      "etiquetas": [
+        "Aventura",
+        "Naturaleza"
+      ],
+      "nombre": "Río Yaque del Norte",
+      "ciudad": "Jarabacoa",
+      "descripcion": "El río más largo del país nace en la cordillera Central; en Jarabacoa se practica rafting y se pasea por sus orillas.",
+      "lat": 19.11,
+      "lng": -70.63
+    },
+    {
+      "id": "zona-colonial-unesco",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial",
+        "Patrimonio"
+      ],
+      "nombre": "Zona Colonial de Santo Domingo",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Centro histórico de la capital, declarado Patrimonio de la Humanidad por la UNESCO en 1990. Concentra los primeros edificios coloniales de América.",
+      "lat": 18.4745,
+      "lng": -69.884
+    },
+    {
+      "id": "plaza-de-la-cultura",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Arte"
+      ],
+      "nombre": "Plaza de la Cultura Juan Pablo Duarte",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Complejo cultural con el Teatro Nacional, la Biblioteca Nacional y varios museos nacionales.",
+      "lat": 18.4795,
+      "lng": -69.9125
+    },
+    {
+      "id": "calle-el-conde",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Zona Colonial",
+        "Música"
+      ],
+      "nombre": "Calle El Conde",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Calle peatonal de la Zona Colonial con tiendas, cafés y terrazas, que va del parque Colón a la Puerta del Conde.",
+      "lat": 18.4733,
+      "lng": -69.8875
+    },
+    {
+      "id": "plaza-de-espana",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Plaza de España",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Plaza junto al Alcázar de Colón y las Atarazanas, rodeada de restaurantes con terraza y vistas al río Ozama.",
+      "lat": 18.4781,
+      "lng": -69.883
+    },
+    {
+      "id": "malecon-santo-domingo",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Música"
+      ],
+      "nombre": "Malecón de Santo Domingo",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Paseo marítimo frente al mar Caribe, con hoteles, restaurantes y vida nocturna. Escenario habitual de conciertos y del desfile de carnaval.",
+      "lat": 18.459,
+      "lng": -69.905
+    },
+    {
+      "id": "mercado-modelo",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Tradición",
+        "Gastronomía"
+      ],
+      "nombre": "Mercado Modelo",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Mercado tradicional de artesanía, ámbar, larimar, café, ron y especias, ideal para comprar recuerdos.",
+      "lat": 18.4772,
+      "lng": -69.8962
+    },
+    {
+      "id": "altos-de-chavon",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Arte",
+        "Música"
+      ],
+      "nombre": "Altos de Chavón",
+      "ciudad": "La Romana",
+      "descripcion": "Réplica de un pueblo mediterráneo del siglo XVI con calles de piedra, galerías, talleres y un gran anfiteatro.",
+      "lat": 18.4135,
+      "lng": -68.954
+    },
+    {
+      "id": "santo-cerro",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Religión",
+        "Tradición"
+      ],
+      "nombre": "Santuario del Santo Cerro",
+      "ciudad": "La Vega",
+      "descripcion": "Santuario de la Virgen de las Mercedes sobre una colina con vistas al valle de La Vega y gran centro de peregrinación.",
+      "lat": 19.25,
+      "lng": -70.512
+    },
+    {
+      "id": "cultura-cocola",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Tradición",
+        "Cultura popular"
+      ],
+      "nombre": "Cultura cocola de San Pedro de Macorís",
+      "ciudad": "San Pedro de Macorís",
+      "descripcion": "Tradición de los descendientes de inmigrantes angloparlantes del Caribe, con danzas como los guloyas.",
+      "lat": 18.462,
+      "lng": -69.3
+    },
+    {
+      "id": "parque-duarte-sd",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Parque Duarte (Santo Domingo)",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Plaza de la Zona Colonial dedicada a Juan Pablo Duarte, con árboles y ambiente de barrio.",
+      "lat": 18.4762,
+      "lng": -69.8885
+    },
+    {
+      "id": "malecon-puerto-plata",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Historia"
+      ],
+      "nombre": "Malecón de Puerto Plata",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Paseo marítimo de Puerto Plata frente al Atlántico, con vistas a la fortaleza San Felipe.",
+      "lat": 19.8005,
+      "lng": -70.688
+    },
+    {
+      "id": "parque-independencia",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Historia"
+      ],
+      "nombre": "Parque Independencia",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Parque con el Altar de la Patria y la Puerta del Conde, espacio de encuentro y de actos cívicos.",
+      "lat": 18.4721,
+      "lng": -69.892
+    },
+    {
+      "id": "estadio-quisqueya",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Deporte",
+        "Tradición"
+      ],
+      "nombre": "Estadio Quisqueya Juan Marichal",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Estadio de béisbol del Licey y las Águilas, equipos de la liga invernal dominicana.",
+      "lat": 18.481,
+      "lng": -69.918
+    },
+    {
+      "id": "gazcue",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Historia",
+        "Arte"
+      ],
+      "nombre": "Barrio de Gazcue",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Barrio histórico de Santo Domingo con casas de principios del siglo XX y ambiente cultural.",
+      "lat": 18.469,
+      "lng": -69.908
+    },
+    {
+      "id": "parque-colon",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Parque Colón",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Plaza principal de la Zona Colonial junto a la Catedral Primada, con la estatua de Cristóbal Colón.",
+      "lat": 18.4737,
+      "lng": -69.8839
+    },
+    {
+      "id": "parque-duarte-santiago",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Historia"
+      ],
+      "nombre": "Parque Duarte (Santiago)",
+      "ciudad": "Santiago",
+      "descripcion": "Plaza central de Santiago de los Caballeros, rodeada de la catedral y edificios históricos.",
+      "lat": 19.4504,
+      "lng": -70.6951
+    },
+    {
+      "id": "calle-del-sol",
+      "categoria": "cultura",
+      "etiquetas": [
+        "Tradición"
+      ],
+      "nombre": "Calle del Sol",
+      "ciudad": "Santiago",
+      "descripcion": "Arteria histórica del centro de Santiago con comercios y ambiente cibaeño.",
+      "lat": 19.4511,
+      "lng": -70.693
+    },
+    {
+      "id": "meson-de-bari",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Comida criolla",
+        "Zona Colonial"
+      ],
+      "nombre": "Mesón de Bari",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Restaurante de la Zona Colonial conocido por su cocina criolla, en un ambiente informal con arte y música.",
+      "lat": 18.4741,
+      "lng": -69.8862
+    },
+    {
+      "id": "adrian-tropical",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Comida criolla",
+        "Mariscos"
+      ],
+      "nombre": "Adrian Tropical",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Restaurante clásico del Malecón de Santo Domingo, conocido por su pescado, tostones y cocina típica con vistas al mar.",
+      "lat": 18.459,
+      "lng": -69.91
+    },
+    {
+      "id": "pate-palo",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Zona Colonial"
+      ],
+      "nombre": "Pat'e Palo European Brasserie",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Taberna en la Plaza de España, que se presenta como una de las primeras de América.",
+      "lat": 18.478,
+      "lng": -69.8834
+    },
+    {
+      "id": "el-conuco",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Comida criolla"
+      ],
+      "nombre": "El Conuco",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Restaurante de Gazcue de cocina dominicana, con espectáculo de música y folclore.",
+      "lat": 18.47,
+      "lng": -69.905
+    },
+    {
+      "id": "meson-de-la-cava",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía"
+      ],
+      "nombre": "Mesón de la Cava",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Restaurante instalado en una cueva natural en el Parque Mirador Sur.",
+      "lat": 18.447,
+      "lng": -69.948
+    },
+    {
+      "id": "barra-payan",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Comida criolla"
+      ],
+      "nombre": "Barra Payán",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Restaurante tradicional de Santo Domingo de cocina criolla, popular entre los locales.",
+      "lat": 18.4695,
+      "lng": -69.9145
+    },
+    {
+      "id": "maison-kreyol",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Zona Colonial"
+      ],
+      "nombre": "Maison Kreyol",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Restaurante de cocina criolla caribeña en la calle Las Mercedes, frente al parque María Trinidad Sánchez.",
+      "lat": 18.475,
+      "lng": -69.8862
+    },
+    {
+      "id": "pueblo-de-los-pescadores",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Mariscos",
+        "Playa"
+      ],
+      "nombre": "Pueblo de los Pescadores",
+      "ciudad": "Las Terrenas",
+      "descripcion": "Calle de la playa de Las Terrenas con restaurantes de pescado y marisco a pie de arena.",
+      "lat": 19.318,
+      "lng": -69.544
+    },
+    {
+      "id": "yaniqueques-boca-chica",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Comida criolla",
+        "Playa"
+      ],
+      "nombre": "Yaniqueques y pescado frito en Boca Chica",
+      "ciudad": "Boca Chica",
+      "descripcion": "Los puestos de la playa de Boca Chica son famosos por los yaniqueques, la masa frita típica, y el pescado frito.",
+      "lat": 18.4497,
+      "lng": -69.6049
+    },
+    {
+      "id": "pescado-con-coco-samana",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Mariscos",
+        "Comida criolla"
+      ],
+      "nombre": "Pescado con coco de Samaná",
+      "ciudad": "Samaná",
+      "descripcion": "Plato emblemático de la península: pescado guisado en salsa de coco, que se sirve en los restaurantes de Samaná.",
+      "lat": 19.2058,
+      "lng": -69.3364
+    },
+    {
+      "id": "fresas-de-constanza",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Naturaleza"
+      ],
+      "nombre": "Fresas de Constanza",
+      "ciudad": "Constanza",
+      "descripcion": "El valle de Constanza es la zona fresera del país: fincas, puestos de fruta y productos de la huerta.",
+      "lat": 18.895,
+      "lng": -70.72
+    },
+    {
+      "id": "cafe-de-barahona",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Café"
+      ],
+      "nombre": "Café de Barahona",
+      "ciudad": "Barahona",
+      "descripcion": "Región cafetalera del sur con café de altura, que se cultiva en las montañas cercanas.",
+      "lat": 18.2085,
+      "lng": -71.1008
+    },
+    {
+      "id": "mangos-de-bani",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía"
+      ],
+      "nombre": "Mangos de Baní",
+      "ciudad": "Baní",
+      "descripcion": "Baní es conocida por sus mangos, que se venden en puestos y mercados en temporada.",
+      "lat": 18.2791,
+      "lng": -70.3319
+    },
+    {
+      "id": "chivo-liniero-monte-cristi",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Comida criolla"
+      ],
+      "nombre": "Chivo liniero de Monte Cristi",
+      "ciudad": "Monte Cristi",
+      "descripcion": "Plato de cabrito típico de la Línea Noroeste, que se sirve en los restaurantes de Monte Cristi.",
+      "lat": 19.8486,
+      "lng": -71.6469
+    },
+    {
+      "id": "boca-de-yuma",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Mariscos"
+      ],
+      "nombre": "Boca de Yuma",
+      "ciudad": "Higüey",
+      "descripcion": "Pueblo de pescadores en la desembocadura del río Yuma, conocido por su marisco fresco.",
+      "lat": 18.38,
+      "lng": -68.605
+    },
+    {
+      "id": "mamajuana-calle-el-conde",
+      "categoria": "restaurante",
+      "etiquetas": [
+        "Gastronomía",
+        "Zona Colonial"
+      ],
+      "nombre": "Mamajuana en la Zona Colonial",
+      "ciudad": "Santo Domingo",
+      "descripcion": "La mamajuana, bebida típica de ron, vino y miel macerados con raíces y hierbas, se vende en tiendas y bares de la Zona Colonial.",
+      "lat": 18.4733,
+      "lng": -69.8875
+    },
+    {
+      "id": "temporada-ballenas",
+      "categoria": "evento",
+      "etiquetas": [
+        "Naturaleza",
+        "Familia"
+      ],
+      "nombre": "Temporada de ballenas jorobadas",
+      "ciudad": "Samaná",
+      "descripcion": "Cada invierno las ballenas jorobadas llegan a la bahía de Samaná para reproducirse. Las excursiones en barco salen del pueblo de Samaná.",
+      "lat": 19.2058,
+      "lng": -69.3364,
+      "cuando": "Del 15 de enero al 31 de marzo (aprox.)",
+      "repite": "Anual",
+      "fecha": "2027-01-15",
+      "fechaFin": "2027-03-31"
+    },
+    {
+      "id": "fiesta-altagracia",
+      "categoria": "evento",
+      "etiquetas": [
+        "Religión",
+        "Tradición"
+      ],
+      "nombre": "Fiesta de la Virgen de la Altagracia",
+      "ciudad": "Higüey",
+      "descripcion": "Peregrinación a la basílica de Higüey en honor de la patrona del país.",
+      "lat": 18.6153,
+      "lng": -68.7075,
+      "cuando": "21 de enero",
+      "repite": "Anual",
+      "fecha": "2027-01-21",
+      "fechaFin": "2027-01-21"
+    },
+    {
+      "id": "natalicio-duarte",
+      "categoria": "evento",
+      "etiquetas": [
+        "Historia",
+        "Fiesta nacional"
+      ],
+      "nombre": "Natalicio de Juan Pablo Duarte",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Fiesta nacional en honor de Duarte, con actos cívicos en el Altar de la Patria.",
+      "lat": 18.4727,
+      "lng": -69.8914,
+      "cuando": "26 de enero",
+      "repite": "Anual",
+      "fecha": "2027-01-26",
+      "fechaFin": "2027-01-26"
+    },
+    {
+      "id": "carnaval-santo-domingo",
+      "categoria": "evento",
+      "etiquetas": [
+        "Carnaval",
+        "Tradición"
+      ],
+      "nombre": "Carnaval de Santo Domingo",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Comparsas y personajes tradicionales como los diablos cojuelos animan las calles de la capital durante febrero.",
+      "lat": 18.459,
+      "lng": -69.905,
+      "cuando": "Febrero (fechas por confirmar)",
+      "repite": "Anual",
+      "fecha": "2027-02-01",
+      "fechaFin": "2027-02-28"
+    },
+    {
+      "id": "desfile-nacional-carnaval",
+      "categoria": "evento",
+      "etiquetas": [
+        "Carnaval",
+        "Tradición"
+      ],
+      "nombre": "Gran Desfile Nacional del Carnaval",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Gran desfile final del carnaval por el Malecón, con comparsas de todo el país.",
+      "lat": 18.459,
+      "lng": -69.905,
+      "cuando": "Último domingo de febrero (por confirmar)",
+      "repite": "Anual",
+      "fecha": "2027-02-28",
+      "fechaFin": "2027-02-28"
+    },
+    {
+      "id": "carnaval-santiago",
+      "categoria": "evento",
+      "etiquetas": [
+        "Carnaval",
+        "Tradición"
+      ],
+      "nombre": "Carnaval de Santiago",
+      "ciudad": "Santiago",
+      "descripcion": "Desfiles con personajes tradicionales como los lechones y los pepineros, en febrero.",
+      "lat": 19.451,
+      "lng": -70.693,
+      "cuando": "Febrero (fechas por confirmar)",
+      "repite": "Anual",
+      "fecha": "2027-02-01",
+      "fechaFin": "2027-02-28"
+    },
+    {
+      "id": "carnaval-monte-cristi",
+      "categoria": "evento",
+      "etiquetas": [
+        "Carnaval",
+        "Tradición"
+      ],
+      "nombre": "Carnaval de Monte Cristi",
+      "ciudad": "Monte Cristi",
+      "descripcion": "Carnaval de la Línea Noroeste, conocido por el enfrentamiento simbólico de Toros y Civiles.",
+      "lat": 19.8486,
+      "lng": -71.6469,
+      "cuando": "Febrero (fechas por confirmar)",
+      "repite": "Anual",
+      "fecha": "2027-02-01",
+      "fechaFin": "2027-02-28"
+    },
+    {
+      "id": "dia-independencia",
+      "categoria": "evento",
+      "etiquetas": [
+        "Historia",
+        "Fiesta nacional"
+      ],
+      "nombre": "Día de la Independencia",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Actos cívicos en la Puerta del Conde para conmemorar la independencia de 1844.",
+      "lat": 18.4722,
+      "lng": -69.8903,
+      "cuando": "27 de febrero",
+      "repite": "Anual",
+      "fecha": "2027-02-27",
+      "fechaFin": "2027-02-27"
+    },
+    {
+      "id": "semana-santa",
+      "categoria": "evento",
+      "etiquetas": [
+        "Religión",
+        "Tradición"
+      ],
+      "nombre": "Semana Santa",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Semana de procesiones y descanso. Muchas familias viajan a la playa; en algunas comunidades hay música de gagá.",
+      "lat": 18.4735,
+      "lng": -69.8835,
+      "cuando": "Del 21 al 28 de marzo de 2027",
+      "repite": "Anual",
+      "fecha": "2027-03-21",
+      "fechaFin": "2027-03-28"
+    },
+    {
+      "id": "festival-san-pedro-cocolo",
+      "categoria": "evento",
+      "etiquetas": [
+        "Tradición",
+        "Cultura popular"
+      ],
+      "nombre": "Fiesta de San Pedro y tradición cocola",
+      "ciudad": "San Pedro de Macorís",
+      "descripcion": "La fiesta del patrón de San Pedro de Macorís es ocasión para los guloyas y otras expresiones cocolas.",
+      "lat": 18.462,
+      "lng": -69.3,
+      "cuando": "29 de junio",
+      "repite": "Anual",
+      "fecha": "2027-06-29",
+      "fechaFin": "2027-06-29"
+    },
+    {
+      "id": "festival-merengue-santo-domingo",
+      "categoria": "evento",
+      "etiquetas": [
+        "Música",
+        "Tradición"
+      ],
+      "nombre": "Festival del Merengue de Santo Domingo",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Conciertos de merengue al aire libre en el Malecón, a finales de julio y comienzos de agosto.",
+      "lat": 18.459,
+      "lng": -69.905,
+      "cuando": "Finales de julio (fechas por confirmar)",
+      "repite": "Anual",
+      "fecha": "2027-07-23",
+      "fechaFin": "2027-08-01"
+    },
+    {
+      "id": "fiestas-santiago-apostol",
+      "categoria": "evento",
+      "etiquetas": [
+        "Religión",
+        "Tradición"
+      ],
+      "nombre": "Fiestas patronales de Santiago Apóstol",
+      "ciudad": "Santiago",
+      "descripcion": "Celebraciones en honor del patrón de Santiago de los Caballeros.",
+      "lat": 19.4507,
+      "lng": -70.6957,
+      "cuando": "25 de julio",
+      "repite": "Anual",
+      "fecha": "2027-07-25",
+      "fechaFin": "2027-07-25"
+    },
+    {
+      "id": "dia-restauracion",
+      "categoria": "evento",
+      "etiquetas": [
+        "Historia",
+        "Fiesta nacional"
+      ],
+      "nombre": "Día de la Restauración",
+      "ciudad": "Santiago",
+      "descripcion": "Actos cívicos en el Monumento a los Héroes de la Restauración.",
+      "lat": 19.4552,
+      "lng": -70.6925,
+      "cuando": "16 de agosto",
+      "repite": "Anual",
+      "fecha": "2027-08-16",
+      "fechaFin": "2027-08-16"
+    },
+    {
+      "id": "fiesta-mercedes",
+      "categoria": "evento",
+      "etiquetas": [
+        "Religión",
+        "Tradición"
+      ],
+      "nombre": "Fiesta de la Virgen de las Mercedes",
+      "ciudad": "La Vega",
+      "descripcion": "Peregrinación al Santo Cerro en honor de la Virgen de las Mercedes.",
+      "lat": 19.25,
+      "lng": -70.512,
+      "cuando": "24 de septiembre",
+      "repite": "Anual",
+      "fecha": "2027-09-24",
+      "fechaFin": "2027-09-24"
+    },
+    {
+      "id": "feria-libro-santo-domingo",
+      "categoria": "evento",
+      "etiquetas": [
+        "Libros",
+        "Arte"
+      ],
+      "nombre": "Feria Internacional del Libro de Santo Domingo",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Gran cita anual del libro en la Plaza de la Cultura, con presentaciones, autores y actividades.",
+      "lat": 18.4795,
+      "lng": -69.9125,
+      "cuando": "Otoño (fechas por confirmar)",
+      "repite": "Anual",
+      "fecha": "2027-09-24",
+      "fechaFin": "2027-10-03"
+    },
+    {
+      "id": "beisbol-invernal",
+      "categoria": "evento",
+      "etiquetas": [
+        "Deporte",
+        "Tradición"
+      ],
+      "nombre": "Temporada de béisbol invernal",
+      "ciudad": "Santo Domingo",
+      "descripcion": "La liga dominicana de béisbol se juega de otoño a enero en estadios como el Quisqueya.",
+      "lat": 18.481,
+      "lng": -69.918,
+      "cuando": "Octubre a enero (calendario por confirmar)",
+      "repite": "Anual",
+      "fecha": "2026-10-20",
+      "fechaFin": "2027-01-31"
+    },
+    {
+      "id": "anfiteatro-altos-de-chavon",
+      "categoria": "concierto",
+      "etiquetas": [
+        "Música",
+        "Arte"
+      ],
+      "nombre": "Anfiteatro de Altos de Chavón",
+      "ciudad": "La Romana",
+      "descripcion": "Anfiteatro de piedra con capacidad para unas 5.000 personas que acoge conciertos de artistas internacionales.",
+      "lat": 18.4138,
+      "lng": -68.9545
+    },
+    {
+      "id": "teatro-nacional",
+      "categoria": "concierto",
+      "etiquetas": [
+        "Música",
+        "Teatro"
+      ],
+      "nombre": "Teatro Nacional Eduardo Brito",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Principal sala de artes escénicas del país, en la Plaza de la Cultura. Acoge conciertos, ópera, danza y teatro.",
+      "lat": 18.4786,
+      "lng": -69.912
+    },
+    {
+      "id": "palacio-de-los-deportes",
+      "categoria": "concierto",
+      "etiquetas": [
+        "Música",
+        "Deporte"
+      ],
+      "nombre": "Palacio de los Deportes Virgilio Travieso Soto",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Gran pabellón de Santo Domingo usado para conciertos y competiciones.",
+      "lat": 18.487,
+      "lng": -69.938
+    },
+    {
+      "id": "estadio-olimpico-felix-sanchez",
+      "categoria": "concierto",
+      "etiquetas": [
+        "Música",
+        "Deporte"
+      ],
+      "nombre": "Estadio Olímpico Félix Sánchez",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Estadio de la capital donde se celebran grandes conciertos y eventos deportivos.",
+      "lat": 18.4846,
+      "lng": -69.9377
+    },
+    {
+      "id": "gran-teatro-del-cibao",
+      "categoria": "concierto",
+      "etiquetas": [
+        "Música",
+        "Teatro"
+      ],
+      "nombre": "Gran Teatro del Cibao",
+      "ciudad": "Santiago",
+      "descripcion": "Gran sala de espectáculos de Santiago, con conciertos, ballet y teatro.",
+      "lat": 19.4659,
+      "lng": -70.6862
+    },
+    {
+      "id": "casa-de-teatro",
+      "categoria": "concierto",
+      "etiquetas": [
+        "Música",
+        "Teatro",
+        "Zona Colonial"
+      ],
+      "nombre": "Casa de Teatro",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Centro cultural de la Zona Colonial con conciertos, teatro y exposiciones.",
+      "lat": 18.477,
+      "lng": -69.8836
+    },
+    {
+      "id": "teatro-la-fiesta",
+      "categoria": "concierto",
+      "etiquetas": [
+        "Música",
+        "Teatro"
+      ],
+      "nombre": "Teatro La Fiesta",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Sala de espectáculos del hotel Jaragua, en el Malecón, con conciertos y shows.",
+      "lat": 18.458,
+      "lng": -69.923
+    },
+    {
+      "id": "mamey-libreria",
+      "categoria": "libreria",
+      "etiquetas": [
+        "Libros",
+        "Café",
+        "Zona Colonial"
+      ],
+      "nombre": "Mamey Librería Caribeña",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Librería, café y galería de arte en la calle Mercedes, frente a la iglesia de las Mercedes. Mezcla libros, exposiciones y buen café.",
+      "lat": 18.4752,
+      "lng": -69.8873
+    },
+    {
+      "id": "cuesta-libros-lincoln",
+      "categoria": "libreria",
+      "etiquetas": [
+        "Libros",
+        "Café"
+      ],
+      "nombre": "Cuesta Libros (Av. Abraham Lincoln)",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Sede de una conocida cadena de librerías de Santo Domingo, con gran selección de libros y café.",
+      "lat": 18.483,
+      "lng": -69.9395
+    },
+    {
+      "id": "cuesta-centro-del-libro",
+      "categoria": "libreria",
+      "etiquetas": [
+        "Libros"
+      ],
+      "nombre": "Cuesta Centro del Libro (Av. 27 de Febrero)",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Sucursal de Librería Cuesta con amplio catálogo de literatura, historia y libros dominicanos.",
+      "lat": 18.489,
+      "lng": -69.929
+    },
+    {
+      "id": "biblioteca-nacional",
+      "categoria": "libreria",
+      "etiquetas": [
+        "Libros",
+        "Arte"
+      ],
+      "nombre": "Biblioteca Nacional Pedro Henríquez Ureña",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Biblioteca nacional en la Plaza de la Cultura, para consultar y leer libros dominicanos y obras de referencia.",
+      "lat": 18.4793,
+      "lng": -69.912
+    },
+    {
+      "id": "museo-casas-reales",
+      "categoria": "museo",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Museo de las Casas Reales",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Antiguo palacio de gobierno colonial del siglo XVI, en la calle Las Damas, con armas, mapas, muebles y objetos de la época.",
+      "lat": 18.4764,
+      "lng": -69.8829
+    },
+    {
+      "id": "museo-familia-dominicana",
+      "categoria": "museo",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Museo de la Familia Dominicana (Casa de Tostado)",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Casa colonial que muestra la vida doméstica de una familia dominicana del siglo XIX.",
+      "lat": 18.4738,
+      "lng": -69.8842
+    },
+    {
+      "id": "museo-casa-duarte",
+      "categoria": "museo",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Museo Casa de Duarte",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Casa donde vivió Juan Pablo Duarte, fundador de la República, con objetos y documentos de su época.",
+      "lat": 18.4755,
+      "lng": -69.8838
+    },
+    {
+      "id": "museo-mundo-de-ambar",
+      "categoria": "museo",
+      "etiquetas": [
+        "Arte",
+        "Zona Colonial"
+      ],
+      "nombre": "Museo Mundo de Ámbar",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Museo del ámbar dominicano, famoso por sus inclusiones de insectos y plantas atrapadas desde hace millones de años.",
+      "lat": 18.4742,
+      "lng": -69.8848
+    },
+    {
+      "id": "museo-del-larimar",
+      "categoria": "museo",
+      "etiquetas": [
+        "Arte",
+        "Zona Colonial"
+      ],
+      "nombre": "Museo del Larimar",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Museo dedicado al larimar, piedra azul exclusiva de la República Dominicana.",
+      "lat": 18.4775,
+      "lng": -69.8835
+    },
+    {
+      "id": "museo-atarazanas-reales",
+      "categoria": "museo",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Museo de las Atarazanas Reales",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Edificio del siglo XVI junto a la Plaza de España, antigua zona de almacenes del puerto, hoy museo.",
+      "lat": 18.478,
+      "lng": -69.884
+    },
+    {
+      "id": "museo-memorial-resistencia",
+      "categoria": "museo",
+      "etiquetas": [
+        "Historia",
+        "Zona Colonial"
+      ],
+      "nombre": "Museo Memorial de la Resistencia Dominicana",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Museo sobre la lucha contra la dictadura de Trujillo y las resistencias posteriores.",
+      "lat": 18.4748,
+      "lng": -69.8843
+    },
+    {
+      "id": "museo-trampolin",
+      "categoria": "museo",
+      "etiquetas": [
+        "Familia",
+        "Zona Colonial"
+      ],
+      "nombre": "Museo Infantil Trampolín",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Museo interactivo para niños en la Zona Colonial.",
+      "lat": 18.4745,
+      "lng": -69.885
+    },
+    {
+      "id": "museo-arte-moderno",
+      "categoria": "museo",
+      "etiquetas": [
+        "Arte"
+      ],
+      "nombre": "Museo de Arte Moderno",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Colección de arte dominicano moderno y contemporáneo, en la Plaza de la Cultura.",
+      "lat": 18.4792,
+      "lng": -69.9128
+    },
+    {
+      "id": "museo-historia-geografia",
+      "categoria": "museo",
+      "etiquetas": [
+        "Historia"
+      ],
+      "nombre": "Museo Nacional de Historia y Geografía",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Museo nacional sobre la historia y la geografía de la República Dominicana, en la Plaza de la Cultura.",
+      "lat": 18.4797,
+      "lng": -69.9122
+    },
+    {
+      "id": "museo-hombre-dominicano",
+      "categoria": "museo",
+      "etiquetas": [
+        "Historia",
+        "Arte"
+      ],
+      "nombre": "Museo del Hombre Dominicano",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Museo con piezas arqueológicas de la cultura taína y otras culturas indígenas.",
+      "lat": 18.4796,
+      "lng": -69.9127
+    },
+    {
+      "id": "museo-historia-natural",
+      "categoria": "museo",
+      "etiquetas": [
+        "Naturaleza",
+        "Familia"
+      ],
+      "nombre": "Museo Nacional de Historia Natural",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Museo de ciencias naturales con colecciones de fauna y flora dominicanas.",
+      "lat": 18.4794,
+      "lng": -69.9119
+    },
+    {
+      "id": "museo-bellapart",
+      "categoria": "museo",
+      "etiquetas": [
+        "Arte"
+      ],
+      "nombre": "Museo Bellapart",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Colección privada de arte dominicano del siglo XX.",
+      "lat": 18.488,
+      "lng": -69.933
+    },
+    {
+      "id": "centro-leon",
+      "categoria": "museo",
+      "etiquetas": [
+        "Arte",
+        "Cultura popular"
+      ],
+      "nombre": "Centro León",
+      "ciudad": "Santiago",
+      "descripcion": "Centro cultural y museo de Santiago, con exposiciones de arte dominicano y cultura popular.",
+      "lat": 19.456,
+      "lng": -70.67
+    },
+    {
+      "id": "museo-tomas-morel",
+      "categoria": "museo",
+      "etiquetas": [
+        "Cultura popular",
+        "Tradición"
+      ],
+      "nombre": "Museo Folklórico Tomás Morel",
+      "ciudad": "Santiago",
+      "descripcion": "Museo de Santiago dedicado al folklore, las tradiciones y el carnaval.",
+      "lat": 19.451,
+      "lng": -70.694
+    },
+    {
+      "id": "museo-arqueologico-regional",
+      "categoria": "museo",
+      "etiquetas": [
+        "Historia",
+        "Arte"
+      ],
+      "nombre": "Museo Arqueológico Regional de Altos de Chavón",
+      "ciudad": "La Romana",
+      "descripcion": "Pequeño museo con piezas de culturas precolombinas del Caribe, dentro de Altos de Chavón.",
+      "lat": 18.4137,
+      "lng": -68.9542
+    },
+    {
+      "id": "escuela-diseno-altos",
+      "categoria": "museo",
+      "etiquetas": [
+        "Arte"
+      ],
+      "nombre": "Escuela de Diseño de Altos de Chavón",
+      "ciudad": "La Romana",
+      "descripcion": "Escuela de diseño y arte en Altos de Chavón, con galerías y talleres de artistas.",
+      "lat": 18.4133,
+      "lng": -68.9538
+    },
+    {
+      "id": "palacio-bellas-artes",
+      "categoria": "museo",
+      "etiquetas": [
+        "Arte"
+      ],
+      "nombre": "Palacio de Bellas Artes",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Sede de exposiciones de arte nacional, en el centro de Santo Domingo.",
+      "lat": 18.477,
+      "lng": -69.91
+    },
+    {
+      "id": "choco-museum",
+      "categoria": "museo",
+      "etiquetas": [
+        "Gastronomía",
+        "Zona Colonial"
+      ],
+      "nombre": "Choco Museum",
+      "ciudad": "Santo Domingo",
+      "descripcion": "Museo del chocolate en la Zona Colonial, donde se aprende cómo se elabora el cacao dominicano.",
+      "lat": 18.4755,
+      "lng": -69.8841
+    },
+    {
+      "id": "museo-ambar-puerto-plata",
+      "categoria": "museo",
+      "etiquetas": [
+        "Arte"
+      ],
+      "nombre": "Museo del Ámbar Dominicano",
+      "ciudad": "Puerto Plata",
+      "descripcion": "Museo en una casa victoriana de Puerto Plata con piezas de ámbar con insectos y plantas.",
+      "lat": 19.793,
+      "lng": -70.6915
+    },
+    {
+      "id": "museo-carnaval-la-vega",
+      "categoria": "museo",
+      "etiquetas": [
+        "Carnaval",
+        "Tradición"
+      ],
+      "nombre": "Museo del Carnaval de La Vega",
+      "ciudad": "La Vega",
+      "descripcion": "Museo dedicado al carnaval vegano, con máscaras y trajes de diablos cojuelos.",
+      "lat": 19.221,
+      "lng": -70.529
     }
   ]
 }

@@ -109,6 +109,7 @@ function initUI() {
 }
 
 /* ====== Tarjeta ====== */
+/* ====== Tarjeta ====== */
 function card(p, withMore = true, highlightColor = null) {
   const cColor = highlightColor || catColor(p.categoria);
   const imgs = (p.imagenes || []).map(s => `<img src="${esc(s)}" alt="${esc(p.nombre)}" loading="lazy" onerror="this.remove()">`).join('');
@@ -123,12 +124,14 @@ function card(p, withMore = true, highlightColor = null) {
 
   return `<article class="card" style="--card-color:${esc(cColor)}">
     ${imgs ? `<div class="imgs">${imgs}</div>` : ''}
-    <div class="body">
+    <header class="card-header">
       <div class="tags">${tagsHtml}</div>
-      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:0.5rem;">
         <h3>${esc(p.nombre)}</h3>
         <button class="fav-btn" type="button" data-id="${esc(p.id)}" onclick="toggleFav('${esc(p.id)}')">${isFav ? '⭐' : '☆'}</button>
       </div>
+    </header>
+    <div class="body">
       ${p.ciudad ? `<div class="city">📍 ${esc(p.ciudad)}</div>` : ''}
       ${p.cuando ? `<div class="when">${esc(p.cuando)}${p.repite ? ' · ' + esc(p.repite) : ''}</div>` : ''}
       <p class="desc">${linkify(p.descripcion)}</p>
@@ -271,15 +274,16 @@ function initConoce() {
 /* ====== Planifica (Leaflet + OpenStreetMap) ====== */
 let map, routeLayer, markers = {}, selected = new Set();
 
+/* ====== Planifica (Leaflet + OpenStreetMap) ====== */
 function initPlan() {
   const selectTag = $('#fav-filter-select');
   const tags = [...new Set(DATA.pois.flatMap(p => p.etiquetas || []))].sort((a, b) => a.localeCompare(b, 'es'));
   
-  // Poblar spinner con etiquetas existentes para filtrar favoritos o lugares
+  // Poblar spinner solo con el nombre de la etiqueta
   tags.forEach(t => {
     const opt = document.createElement('option');
     opt.value = `tag:${t}`;
-    opt.textContent = `Etiqueta: ${t}`;
+    opt.textContent = t; // Solo el nombre de la etiqueta
     selectTag.appendChild(opt);
   });
 

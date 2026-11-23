@@ -99,9 +99,10 @@ h1,h2,h3{font-family:var(--f-head);line-height:1.1}
 .tag{font-size:.78rem;padding:.15rem .65rem;border-radius:99px;background:var(--pill-color, var(--soft));color:#fff;font-weight:600}
 
 /* Texto de la descripción en color blanco */
-.desc{margin:0;color:#ffffff;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.desc{margin:0;color:#ffffff;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 
 /* Desplegable de cada POI (clic en la tarjeta o en "Ver más") */
+.desc.open{-webkit-line-clamp:unset}
 .card{cursor:pointer}
 .grid,.rail{align-items:start}
 .drop{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .3s ease,visibility 0s .3s}

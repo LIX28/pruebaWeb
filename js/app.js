@@ -106,12 +106,15 @@ function initUI() {
   }, { passive: true });
 
   // Clic en un POI (o en "Ver más") abre/cierra su desplegable
-  const toggleCard = c => {
-    const open = c.classList.toggle('open');
-    const b = c.querySelector('.more');
-    if (b) { b.textContent = open ? 'Ver menos' : 'Ver más'; b.setAttribute('aria-expanded', open); }
-  };
+  const toggleCard = c => c.classList.toggle('open');
   document.addEventListener('click', e => {
+    const more = e.target.closest('.more');      // "Ver más": solo extiende el texto
+    if (more) {
+      const open = more.previousElementSibling.classList.toggle('open');
+      more.textContent = open ? 'Ver menos' : 'Ver más';
+      more.setAttribute('aria-expanded', open);
+      return;
+    }
     if (e.target.closest('a, .fav-btn')) return;
     const c = e.target.closest('.card');
     if (c && !String(getSelection()).trim()) toggleCard(c);
@@ -149,7 +152,6 @@ function card(p, withMore = true, highlightColor = null) {
       <p class="desc">${linkify(p.descripcion)}</p>
       ${withMore ? '<button class="more" type="button" aria-expanded="false">Ver más</button>' : ''}
       <div class="drop"><div class="drop-in">
-        <p class="full">${linkify(p.descripcion)}</p>
         <div class="links">
           <a href="${osmUrl}" target="_blank" rel="noopener">Ver en mapa</a>
           ${p.web ? `<a href="${esc(encodeURI(decodeURI(p.web)))}" target="_blank" rel="noopener">Web oficial</a>` : ''}

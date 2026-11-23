@@ -12,9 +12,27 @@ const tagColor = (tag, fallbackCatId) => DATA.etiquetasColores?.[tag] || catColo
 const linkify = t => esc(t).replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">receta/enlace</a>');
 const PAGE = document.body.dataset.page;
 
+// Gestión de favoritos en localStorage
+function getFavs() {
+  try { return JSON.parse(localStorage.getItem('rd_favs') || '[]'); } catch { return []; }
+}
+function toggleFav(id) {
+  let favs = getFavs();
+  if (favs.includes(id)) {
+    favs = favs.filter(item => item !== id);
+  } else {
+    favs.push(id);
+  }
+  localStorage.setItem('rd_favs', JSON.stringify(favs));
+  document.querySelectorAll(`.fav-btn[data-id="${id}"]`).forEach(btn => {
+    btn.textContent = favs.includes(id) ? '⭐' : '☆';
+  });
+  if (PAGE === 'planifica') renderLista();
+}
+
 /* ====== Arranque ====== */
 document.addEventListener('DOMContentLoaded', async () => {
-  initUI(); // tema y menú funcionan aunque falle el fetch
+  initUI();
 
   try {
     const res = await fetch('./data.json', { cache: 'no-cache' });
@@ -23,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (e) {
     console.error('Error cargando data.json:', e);
     $('main')?.insertAdjacentHTML('afterbegin',
-      '<p class="wrap">No se pudo cargar data.json. Comprueba que está en la raíz del repositorio (en local, usa un servidor, no file://).</p>');
+      '<p class="wrap">No se pudo cargar data.json. Comprueba que está en la raíz del repositorio.</p>');
     return;
   }
 
@@ -32,36 +50,47 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (PAGE === 'planifica') initPlan();
 });
 
-/* ====== Tema, menú y barra superior ====== */
+/* ====== Tema, menú, botones y barra superior ====== */
 function initUI() {
   const root = document.documentElement;
   const themeBtn = $('#theme');
-  const paintIcon = () => { if (themeBtn) themeBtn.textContent = root.dataset.theme === 'dark' ? '☀️' : '🌙'; };
+  
+  // Sol en claro (☀️), Luna en oscuro (🌙)
+  const paintIcon = () => { if (themeBtn) themeBtn.textContent = root.dataset.theme === 'dark' ? '🌙' : '☀️'; };
   paintIcon();
+  
   themeBtn?.addEventListener('click', () => {
     root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
     localStorage.setItem('theme', root.dataset.theme);
     paintIcon();
-    // repintar mapa si existe (el contenedor cambia de color)
     if (window.map?.invalidateSize) window.map.invalidateSize();
   });
 
-  // Pulsar el logo intercambia rojo <-> azul en toda la web
+  // Logo cambia paleta rojo <-> azul
   $('#logo')?.addEventListener('click', () => {
     root.dataset.palette = root.dataset.palette === 'blue' ? 'red' : 'blue';
     localStorage.setItem('palette', root.dataset.palette);
   });
 
-  // Marca la página activa
   document.querySelectorAll('#menu a[data-nav]').forEach(a => a.classList.toggle('on', a.dataset.nav === PAGE));
 
-  // Menú móvil
+  // Menú hamburguesa funcional con cierre al pulsar enlaces y scrim
   const menu = $('#menu'), scrim = $('#scrim'), burger = $('#burger');
-  const toggleMenu = open => { menu?.classList.toggle('open', open); scrim?.classList.toggle('on', open); };
-  burger?.addEventListener('click', () => toggleMenu(!menu.classList.contains('open')));
+  const toggleMenu = open => { 
+    menu?.classList.toggle('open', open); 
+    scrim?.classList.toggle('on', open); 
+  };
+  burger?.addEventListener('click', e => { e.stopPropagation(); toggleMenu(!menu.classList.contains('open')); });
   scrim?.addEventListener('click', () => toggleMenu(false));
+  menu?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => toggleMenu(false)));
 
-  // Ocultar barra al bajar, mostrar al subir
+  // Buscador desplegable móvil en planifica
+  const toggleSidebar = $('#toggle-sidebar');
+  const sidebar = $('#sidebar-plan');
+  toggleSidebar?.addEventListener('click', () => {
+    sidebar?.classList.toggle('open');
+  });
+
   const topbar = $('#topbar');
   let lastY = scrollY;
   addEventListener('scroll', () => {
@@ -70,7 +99,6 @@ function initUI() {
     lastY = scrollY;
   }, { passive: true });
 
-  // "Ver más" de las descripciones
   document.addEventListener('click', e => {
     if (e.target.matches('.more')) {
       const d = e.target.previousElementSibling;
@@ -85,6 +113,9 @@ function card(p, withMore = true, highlightColor = null) {
   const cColor = highlightColor || catColor(p.categoria);
   const imgs = (p.imagenes || []).map(s => `<img src="${esc(s)}" alt="${esc(p.nombre)}" loading="lazy" onerror="this.remove()">`).join('');
   const osmUrl = `https://www.openstreetmap.org/?mlat=${p.lat}&mlon=${p.lng}#map=16/${p.lat}/${p.lng}`;
+  const favs = getFavs();
+  const isFav = favs.includes(p.id);
+
   const tagsHtml = [
     `<span class="tag" style="--pill-color:${esc(catColor(p.categoria))}">${esc(catName(p.categoria))}</span>`,
     ...(p.etiquetas || []).map(t => `<span class="tag" style="--pill-color:${esc(tagColor(t, p.categoria))}">${esc(t)}</span>`)
@@ -94,12 +125,18 @@ function card(p, withMore = true, highlightColor = null) {
     ${imgs ? `<div class="imgs">${imgs}</div>` : ''}
     <div class="body">
       <div class="tags">${tagsHtml}</div>
-      <h3>${esc(p.nombre)}</h3>
+      <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+        <h3>${esc(p.nombre)}</h3>
+        <button class="fav-btn" type="button" data-id="${esc(p.id)}" onclick="toggleFav('${esc(p.id)}')">${isFav ? '⭐' : '☆'}</button>
+      </div>
       ${p.ciudad ? `<div class="city">📍 ${esc(p.ciudad)}</div>` : ''}
       ${p.cuando ? `<div class="when">${esc(p.cuando)}${p.repite ? ' · ' + esc(p.repite) : ''}</div>` : ''}
       <p class="desc">${linkify(p.descripcion)}</p>
       ${withMore ? '<button class="more" type="button">Ver más</button>' : ''}
-      <div class="links"><a href="${osmUrl}" target="_blank" rel="noopener">Ver en mapa</a>${p.web ? `<a href="${esc(encodeURI(decodeURI(p.web)))}" target="_blank" rel="noopener">Web oficial</a>` : ''}</div>
+      <div class="links">
+        <a href="${osmUrl}" target="_blank" rel="noopener">Ver en mapa</a>
+        ${p.web ? `<a href="${esc(encodeURI(decodeURI(p.web)))}" target="_blank" rel="noopener">Web oficial</a>` : ''}
+      </div>
     </div></article>`;
 }
 
@@ -164,18 +201,14 @@ function initConoce() {
   const grid = $('#lista-conoce'), sentinel = $('#sentinel'), fin = $('#fin');
   if (!grid || !sentinel) return;
 
-  const f = { q: '', tipo: '', ciudad: '', tags: new Set(), desde: '', hasta: '' };
+  const f = { q: '', tipo: '', ciudad: '', desde: '', hasta: '' };
   let results = [], shown = 0, io = null;
 
-  // Opciones de los filtros a partir de data.json
   const cats = DATA.categorias.filter(c => DATA.pois.some(p => p.categoria === c.id));
   $('#ftipo').insertAdjacentHTML('beforeend', cats.map(c => `<option value="${esc(c.id)}">${esc(c.nombre)}</option>`).join(''));
   const ciudades = [...new Set(DATA.pois.map(p => p.ciudad).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'es'));
   $('#fciudad').insertAdjacentHTML('beforeend', ciudades.map(c => `<option value="${esc(c)}">${esc(c)}</option>`).join(''));
-  const tags = [...new Set(DATA.pois.flatMap(p => p.etiquetas || []))].sort((a, b) => a.localeCompare(b, 'es'));
-  $('#ftags').innerHTML = tags.map(t => `<button class="chip" type="button" data-t="${esc(t)}">${esc(t)}</button>`).join('');
 
-  // conoce.html#eventos preselecciona el tipo
   const hc = DATA.categorias.find(c => c.seccion === location.hash.slice(1));
   if (hc) { f.tipo = hc.id; $('#ftipo').value = hc.id; }
 
@@ -183,11 +216,10 @@ function initConoce() {
     if (f.q && !norm(p.nombre).includes(f.q)) return false;
     if (f.tipo && p.categoria !== f.tipo) return false;
     if (f.ciudad && p.ciudad !== f.ciudad) return false;
-    if (f.tags.size && !(p.etiquetas || []).some(t => f.tags.has(t))) return false;
     if (f.tipo === 'evento' && (f.desde || f.hasta)) {
       if (!p.fecha) return false;
-      const fin = p.fechaFin || p.fecha;           // el evento solapa con el rango elegido
-      if (f.desde && fin < f.desde) return false;
+      const finDate = p.fechaFin || p.fecha;
+      if (f.desde && finDate < f.desde) return false;
       if (f.hasta && p.fecha > f.hasta) return false;
     }
     return true;
@@ -227,18 +259,9 @@ function initConoce() {
   $('#fciudad').addEventListener('change', e => { f.ciudad = e.target.value; apply(); });
   $('#fdesde').addEventListener('change', e => { f.desde = e.target.value; apply(); });
   $('#fhasta').addEventListener('change', e => { f.hasta = e.target.value; apply(); });
-  $('#ftags').addEventListener('click', e => {
-    const b = e.target.closest('.chip'); if (!b) return;
-    const t = b.dataset.t;
-    f.tags.has(t) ? f.tags.delete(t) : f.tags.add(t);
-    b.classList.toggle('on', f.tags.has(t));
-    apply();
-  });
   $('#fclear').addEventListener('click', () => {
     Object.assign(f, { q: '', tipo: '', ciudad: '', desde: '', hasta: '' });
-    f.tags.clear();
     $('#bq').value = ''; $('#ftipo').value = ''; $('#fciudad').value = '';
-    document.querySelectorAll('#ftags .chip.on').forEach(c => c.classList.remove('on'));
     apply();
   });
 
@@ -246,25 +269,22 @@ function initConoce() {
 }
 
 /* ====== Planifica (Leaflet + OpenStreetMap) ====== */
-let map, routeLayer, markers = {}, selected = new Set(), activeTags = new Set();
+let map, routeLayer, markers = {}, selected = new Set();
 
 function initPlan() {
-  const usedCats = DATA.categorias.filter(c => DATA.pois.some(p => p.categoria === c.id));
-  $('#chips').innerHTML = usedCats.map(c => `<button class="chip" type="button" data-c="${esc(c.id)}">${esc(c.nombre)}</button>`).join('');
-  $('#chips').addEventListener('click', e => {
-    if (!e.target.matches('.chip')) return;
-    const c = e.target.dataset.c;
-    activeTags.has(c) ? activeTags.delete(c) : activeTags.add(c);
-    e.target.classList.toggle('on');
-    renderLista();
+  const selectTag = $('#fav-filter-select');
+  const tags = [...new Set(DATA.pois.flatMap(p => p.etiquetas || []))].sort((a, b) => a.localeCompare(b, 'es'));
+  
+  // Poblar spinner con etiquetas existentes para filtrar favoritos o lugares
+  tags.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = `tag:${t}`;
+    opt.textContent = `Etiqueta: ${t}`;
+    selectTag.appendChild(opt);
   });
+
+  selectTag.addEventListener('change', renderLista);
   $('#q').addEventListener('input', renderLista);
-  $('#auto').addEventListener('click', () => {
-    if (!activeTags.size) return alert('Elige al menos una etiqueta.');
-    DATA.pois.filter(p => activeTags.has(p.categoria)).forEach(p => selected.add(p.id));
-    renderLista();
-    drawRoute();
-  });
   $('#ruta').addEventListener('click', drawRoute);
   renderLista();
   setupMap();
@@ -272,16 +292,31 @@ function initPlan() {
 
 function filtered() {
   const q = $('#q').value.toLowerCase();
-  return DATA.pois.filter(p => (!activeTags.size || activeTags.has(p.categoria)) &&
-    (!q || [p.nombre, p.descripcion, ...(p.etiquetas || [])].join(' ').toLowerCase().includes(q)));
+  const filterVal = $('#fav-filter-select')?.value || '';
+  const favs = getFavs();
+
+  return DATA.pois.filter(p => {
+    if (filterVal === 'solo-favs' && !favs.includes(p.id)) return false;
+    if (filterVal.startsWith('tag:')) {
+      const tag = filterVal.split(':')[1];
+      if (!(p.etiquetas || []).includes(tag)) return false;
+    }
+    if (q && ![p.nombre, p.descripcion, ...(p.etiquetas || [])].join(' ').toLowerCase().includes(q)) return false;
+    return true;
+  });
 }
 
 function renderLista() {
   const lista = $('#lista');
-  lista.innerHTML = filtered().map(p => `<li data-id="${esc(p.id)}">
-    <input type="checkbox" ${selected.has(p.id) ? 'checked' : ''} aria-label="Añadir ${esc(p.nombre)}">
-    ${p.imagenes?.[0] ? `<img src="${esc(p.imagenes[0])}" alt="" onerror="this.remove()">` : ''}
-    <span><strong>${esc(p.nombre)}</strong><br><small>${esc(catName(p.categoria))}</small></span></li>`).join('') || '<li>Sin resultados.</li>';
+  const favs = getFavs();
+  lista.innerHTML = filtered().map(p => {
+    const isFav = favs.includes(p.id);
+    return `<li data-id="${esc(p.id)}">
+      <input type="checkbox" ${selected.has(p.id) ? 'checked' : ''} aria-label="Añadir ${esc(p.nombre)}">
+      ${p.imagenes?.[0] ? `<img src="${esc(p.imagenes[0])}" alt="" onerror="this.remove()">` : ''}
+      <span style="flex:1"><strong>${esc(p.nombre)}</strong> ${isFav ? '⭐' : ''}<br><small>${esc(catName(p.categoria))}</small></span>
+    </li>`;
+  }).join('') || '<li>Sin resultados.</li>';
 
   lista.querySelectorAll('li[data-id]').forEach(li => {
     const id = li.dataset.id;
@@ -301,7 +336,7 @@ function renderLista() {
 function setupMap() {
   const mapEl = $('#map');
   if (!window.L) {
-    $('#mapmsg').textContent = 'No se pudo cargar el mapa de OpenStreetMap. Revisa tu conexión a internet.';
+    $('#mapmsg').textContent = 'No se pudo cargar el mapa de OpenStreetMap.';
     return;
   }
   mapEl.innerHTML = '';
@@ -332,20 +367,50 @@ function setupMap() {
 async function drawRoute() {
   if (!map) return;
   const pts = DATA.pois.filter(p => selected.has(p.id));
-  if (pts.length < 2) return alert('Elige al menos 2 lugares para trazar la ruta.');
+  const resBox = $('#ruta-resultado');
+  if (pts.length < 2) {
+    if (resBox) resBox.hidden = true;
+    return alert('Elige al menos 2 lugares para trazar la ruta.');
+  }
   routeLayer.clearLayers();
   const coords = pts.map(p => `${p.lng},${p.lat}`).join(';');
 
   try {
-    const res = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
+    const response = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`);
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
     if (data.code !== 'Ok' || !data.routes?.length) throw new Error('Ruta no disponible');
-    const latLngs = data.routes[0].geometry.coordinates.map(([lng, lat]) => [lat, lng]);
+    
+    const route = data.routes[0];
+    const latLngs = route.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
     const line = L.polyline(latLngs, { color: '#1F4E9C', weight: 5, opacity: .85 }).addTo(routeLayer);
     map.fitBounds(line.getBounds(), { padding: [40, 40] });
+
+    // Mostrar duración estimada e imagen resumen del trayecto
+    const durationMin = Math.round(route.duration / 60);
+    const hours = Math.floor(durationMin / 60);
+    const mins = durationMin % 60;
+    const timeStr = hours > 0 ? `${hours} h ${mins} min` : `${mins} min`;
+    const firstImg = pts[0].imagenes?.[0] || './imagen/puntacana.jpg';
+
+    if (resBox) {
+      resBox.hidden = false;
+      resBox.innerHTML = `
+        <div style="display:flex; align-items:center; gap:1rem;">
+          <img src="${esc(firstImg)}" alt="Trayecto">
+          <div>
+            <strong>🚗 Trayecto calculado (${pts.length} puntos)</strong>
+            <p style="margin:0.2rem 0 0; font-size:0.95rem;">Duración estimada: <strong>${timeStr}</strong></p>
+          </div>
+        </div>
+      `;
+    }
   } catch (_) {
     const line = L.polyline(pts.map(p => [p.lat, p.lng]), { color: '#C8102E', weight: 4, dashArray: '8, 8' }).addTo(routeLayer);
     map.fitBounds(line.getBounds(), { padding: [40, 40] });
+    if (resBox) {
+      resBox.hidden = false;
+      resBox.innerHTML = `<p style="margin:0"><strong>Ruta en línea recta trazada</strong> (${pts.length} puntos seleccionados)</p>`;
+    }
   }
 }

@@ -192,4 +192,20 @@ body.sb-open #toggle-sidebar span{transform:rotate(180deg)}
   #scrim.on{display:block;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40}
 }
 @media (max-width:520px){.rail{grid-template-columns:1fr}}
+
+/* Conoce: en pantallas muy pequeñas el buscador pasa a botón flotante + menú deslizante (derecha, color del menú) */
+#toggle-filtros{display:none}
+@media (max-width:600px){   /* <- cambia 600px para decidir cuándo se considera "muy pequeña" */
+  body[data-page=conoce] #filtros{position:fixed;top:3.5rem;right:0;bottom:0;width:min(320px,88vw);z-index:36;margin:0;padding:1rem 1rem 5.5rem;border:0;border-radius:0;background:var(--bar);color:#fff;overflow-y:auto;align-content:start;box-shadow:-4px 0 16px rgba(0,0,0,.3);transform:translateX(105%);visibility:hidden;transition:transform .3s ease,visibility 0s .3s,background .4s}
+  body.f-open[data-page=conoce] #filtros{transform:none;visibility:visible;transition:transform .3s ease,visibility 0s,background .4s}
+  body[data-page=conoce] #filtros label{color:#fff}
+  body[data-page=conoce] #filtros .btn,body[data-page=conoce] #filtros .btn.alt{background:#fff;color:var(--bar)}
+  body[data-page=conoce] #filtros :focus-visible{outline-color:#fff}
+  body[data-page=conoce] #toggle-filtros{display:grid;place-items:center;position:fixed;bottom:1.5rem;right:1.5rem;z-index:37;width:3.4rem;height:3.4rem;border-radius:50%;border:2px solid #fff;background:var(--bar);color:#fff;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.35);transition:background .4s}
+  #toggle-filtros svg{width:24px;height:24px;grid-area:1/1}
+  #toggle-filtros .ico-close{display:none}
+  body.f-open #toggle-filtros .ico-search{display:none}
+  body.f-open #toggle-filtros .ico-close{display:block}
+  #toggle-filtros:focus-visible{outline-color:#fff}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}

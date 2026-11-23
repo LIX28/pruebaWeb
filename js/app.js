@@ -97,6 +97,16 @@ function initUI() {
     if (e.key === 'Escape' && document.body.classList.contains('sb-open')) toggleSidebar?.click();
   });
 
+  // Conoce: buscador como botón flotante + menú deslizante (solo pantallas muy pequeñas, ver CSS)
+  const toggleFiltros = $('#toggle-filtros');
+  const setFiltros = open => {
+    document.body.classList.toggle('f-open', open);
+    toggleFiltros?.setAttribute('aria-expanded', open);
+    toggleFiltros?.setAttribute('aria-label', open ? 'Cerrar buscador' : 'Abrir buscador');
+  };
+  toggleFiltros?.addEventListener('click', () => setFiltros(!document.body.classList.contains('f-open')));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setFiltros(false); });
+
   const topbar = $('#topbar');
   let lastY = scrollY;
   addEventListener('scroll', () => {

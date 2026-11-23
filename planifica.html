@@ -29,28 +29,26 @@
 
   <main class="wrap">
     <h1 class="page-title">Planifica tu ruta</h1>
-    <div class="plan">
-      <aside id="sidebar-plan">
-        <input id="q" type="search" placeholder="Buscar lugares o favoritos…" aria-label="Buscar">
-        <label style="font-weight:600; font-size:0.9rem;">Filtrar favoritos por etiqueta:
-          <select id="fav-filter-select">
-            <option value="">Todos los lugares</option>
-            <option value="solo-favs">Solo mis favoritos</option>
-          </select>
-        </label>
-        <div class="row">
-          <button class="btn alt" id="ruta" type="button">Trazar ruta</button>
-        </div>
-        <ul class="lista" id="lista"></ul>
-        <p class="note" id="info">Pasa el ratón por un lugar para ver su descripción.</p>
-      </aside>
-      <div style="display:flex; flex-direction:column; gap:1rem;">
-        <div id="map"><p id="mapmsg">Cargando mapa…</p></div>
-        <div id="ruta-resultado" hidden></div>
-      </div>
-    </div>
+    <div id="map"><p id="mapmsg">Cargando mapa…</p></div>
+    <div id="ruta-resultado" hidden></div>
   </main>
-  <button id="toggle-sidebar" type="button">Buscador / Ruta</button>
+
+  <!-- Buscador desplegable (del color del menú) y flecha en el borde izquierdo -->
+  <aside id="sidebar-plan" aria-label="Buscador y ruta">
+    <input id="q" type="search" placeholder="Buscar lugares o favoritos…" aria-label="Buscar">
+    <label style="font-weight:600; font-size:0.9rem;">Filtrar favoritos por etiqueta:
+      <select id="fav-filter-select">
+        <option value="">Todos los lugares</option>
+        <option value="solo-favs">Solo mis favoritos</option>
+      </select>
+    </label>
+    <div class="row">
+      <button class="btn alt" id="ruta" type="button">Trazar ruta</button>
+    </div>
+    <ul class="lista" id="lista"></ul>
+    <p class="note" id="info">Pasa el ratón por un lugar para ver su descripción.</p>
+  </aside>
+  <button id="toggle-sidebar" type="button" aria-label="Abrir buscador" aria-expanded="false" aria-controls="sidebar-plan"><span>❯</span></button>
 
   <footer>© República Dominicana · Guía de viaje</footer>
 </body>

@@ -55,8 +55,10 @@ function initUI() {
   const root = document.documentElement;
   const themeBtn = $('#theme');
   
-  // Sol en claro (☀️), Luna en oscuro (🌙)
-  const paintIcon = () => { if (themeBtn) themeBtn.textContent = root.dataset.theme === 'dark' ? '🌙' : '☀️'; };
+  // Sol en claro, luna en oscuro (iconos SVG blancos)
+  const SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
+  const MOON = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>';
+  const paintIcon = () => { if (themeBtn) themeBtn.innerHTML = root.dataset.theme === 'dark' ? MOON : SUN; };
   paintIcon();
   
   themeBtn?.addEventListener('click', () => {
@@ -86,9 +88,13 @@ function initUI() {
 
   // Buscador desplegable móvil en planifica
   const toggleSidebar = $('#toggle-sidebar');
-  const sidebar = $('#sidebar-plan');
   toggleSidebar?.addEventListener('click', () => {
-    sidebar?.classList.toggle('open');
+    const open = document.body.classList.toggle('sb-open');
+    toggleSidebar.setAttribute('aria-expanded', open);
+    toggleSidebar.setAttribute('aria-label', open ? 'Cerrar buscador' : 'Abrir buscador');
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.body.classList.contains('sb-open')) toggleSidebar?.click();
   });
 
   const topbar = $('#topbar');
@@ -99,12 +105,19 @@ function initUI() {
     lastY = scrollY;
   }, { passive: true });
 
+  // Clic en un POI (o en "Ver más") abre/cierra su desplegable
+  const toggleCard = c => {
+    const open = c.classList.toggle('open');
+    const b = c.querySelector('.more');
+    if (b) { b.textContent = open ? 'Ver menos' : 'Ver más'; b.setAttribute('aria-expanded', open); }
+  };
   document.addEventListener('click', e => {
-    if (e.target.matches('.more')) {
-      const d = e.target.previousElementSibling;
-      const o = d.classList.toggle('open');
-      e.target.textContent = o ? 'Ver menos' : 'Ver más';
-    }
+    if (e.target.closest('a, .fav-btn')) return;
+    const c = e.target.closest('.card');
+    if (c && !String(getSelection()).trim()) toggleCard(c);
+  });
+  document.addEventListener('keydown', e => {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('.card[tabindex]')) { e.preventDefault(); toggleCard(e.target); }
   });
 }
 
@@ -121,7 +134,7 @@ function card(p, withMore = true, highlightColor = null) {
     ...(p.etiquetas || []).map(t => `<span class="tag" style="--pill-color:${esc(tagColor(t, p.categoria))}">${esc(t)}</span>`)
   ].join('');
 
-  return `<article class="card" style="--card-color:${esc(cColor)}">
+  return `<article class="card" style="--card-color:${esc(cColor)};--title-color:${esc(catColor(p.categoria))}"${withMore ? '' : ' tabindex="0"'}>
     ${imgs ? `<div class="imgs">${imgs}</div>` : ''}
     <header class="card-header">
       <div class="tags">${tagsHtml}</div>
@@ -134,11 +147,14 @@ function card(p, withMore = true, highlightColor = null) {
       ${p.ciudad ? `<div class="city">📍 ${esc(p.ciudad)}</div>` : ''}
       ${p.cuando ? `<div class="when">${esc(p.cuando)}${p.repite ? ' · ' + esc(p.repite) : ''}</div>` : ''}
       <p class="desc">${linkify(p.descripcion)}</p>
-      ${withMore ? '<button class="more" type="button">Ver más</button>' : ''}
-      <div class="links">
-        <a href="${osmUrl}" target="_blank" rel="noopener">Ver en mapa</a>
-        ${p.web ? `<a href="${esc(encodeURI(decodeURI(p.web)))}" target="_blank" rel="noopener">Web oficial</a>` : ''}
-      </div>
+      ${withMore ? '<button class="more" type="button" aria-expanded="false">Ver más</button>' : ''}
+      <div class="drop"><div class="drop-in">
+        <p class="full">${linkify(p.descripcion)}</p>
+        <div class="links">
+          <a href="${osmUrl}" target="_blank" rel="noopener">Ver en mapa</a>
+          ${p.web ? `<a href="${esc(encodeURI(decodeURI(p.web)))}" target="_blank" rel="noopener">Web oficial</a>` : ''}
+        </div>
+      </div></div>
     </div></article>`;
 }
 

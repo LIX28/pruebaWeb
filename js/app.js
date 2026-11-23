@@ -109,7 +109,6 @@ function initUI() {
 }
 
 /* ====== Tarjeta ====== */
-/* ====== Tarjeta ====== */
 function card(p, withMore = true, highlightColor = null) {
   const cColor = highlightColor || catColor(p.categoria);
   const imgs = (p.imagenes || []).map(s => `<img src="${esc(s)}" alt="${esc(p.nombre)}" loading="lazy" onerror="this.remove()">`).join('');
@@ -198,7 +197,7 @@ function initHomeFilterAndRotator() {
 
 /* ====== Conoce: lista infinita + buscador ====== */
 const BATCH = 6;
-const norm = t => String(t ?? '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+const norm = t => String(t ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase().trim();
 
 function initConoce() {
   const grid = $('#lista-conoce'), sentinel = $('#sentinel'), fin = $('#fin');
@@ -274,16 +273,14 @@ function initConoce() {
 /* ====== Planifica (Leaflet + OpenStreetMap) ====== */
 let map, routeLayer, markers = {}, selected = new Set();
 
-/* ====== Planifica (Leaflet + OpenStreetMap) ====== */
 function initPlan() {
   const selectTag = $('#fav-filter-select');
   const tags = [...new Set(DATA.pois.flatMap(p => p.etiquetas || []))].sort((a, b) => a.localeCompare(b, 'es'));
   
-  // Poblar spinner solo con el nombre de la etiqueta
   tags.forEach(t => {
     const opt = document.createElement('option');
     opt.value = `tag:${t}`;
-    opt.textContent = t; // Solo el nombre de la etiqueta
+    opt.textContent = t;
     selectTag.appendChild(opt);
   });
 
@@ -368,16 +365,30 @@ function setupMap() {
   });
 }
 
+function calcHaversineKm(pts) {
+  const R = 6371;
+  let total = 0;
+  for (let i = 0; i < pts.length - 1; i++) {
+    const dLat = (pts[i+1].lat - pts[i].lat) * Math.PI / 180;
+    const dLon = (pts[i+1].lng - pts[i].lng) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(pts[i].lat * Math.PI / 180) * Math.cos(pts[i+1].lat * Math.PI / 180) *
+              Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    total += R * c;
+  }
+  return total;
+}
+
 async function drawRoute() {
   if (!map) return;
   const pts = DATA.pois.filter(p => selected.has(p.id));
-  const resBox = $('#ruta-resultado');
-  if (pts.length < 2) {
-    if (resBox) resBox.hidden = true;
-    return alert('Elige al menos 2 lugares para trazar la ruta.');
-  }
+  if (pts.length < 2) return alert('Elige al menos 2 lugares para trazar la ruta.');
   routeLayer.clearLayers();
   const coords = pts.map(p => `${p.lng},${p.lat}`).join(';');
+
+  let timeStr = '';
+  let line;
 
   try {
     const response = await fetch(`https://router.project-osrm.org/route/v1/driving/${coords}?overview=full&geometries=geojson`);
@@ -387,34 +398,38 @@ async function drawRoute() {
     
     const route = data.routes[0];
     const latLngs = route.geometry.coordinates.map(([lng, lat]) => [lat, lng]);
-    const line = L.polyline(latLngs, { color: '#1F4E9C', weight: 5, opacity: .85 }).addTo(routeLayer);
-    map.fitBounds(line.getBounds(), { padding: [40, 40] });
+    line = L.polyline(latLngs, { color: '#1F4E9C', weight: 5, opacity: .85 }).addTo(routeLayer);
 
-    // Mostrar duración estimada e imagen resumen del trayecto
     const durationMin = Math.round(route.duration / 60);
     const hours = Math.floor(durationMin / 60);
     const mins = durationMin % 60;
-    const timeStr = hours > 0 ? `${hours} h ${mins} min` : `${mins} min`;
-    const firstImg = pts[0].imagenes?.[0] || './imagen/puntacana.jpg';
-
-    if (resBox) {
-      resBox.hidden = false;
-      resBox.innerHTML = `
-        <div style="display:flex; align-items:center; gap:1rem;">
-          <img src="${esc(firstImg)}" alt="Trayecto">
-          <div>
-            <strong>🚗 Trayecto calculado (${pts.length} puntos)</strong>
-            <p style="margin:0.2rem 0 0; font-size:0.95rem;">Duración estimada: <strong>${timeStr}</strong></p>
-          </div>
-        </div>
-      `;
-    }
+    timeStr = hours > 0 ? `${hours} h ${mins} min` : `${mins} min`;
   } catch (_) {
-    const line = L.polyline(pts.map(p => [p.lat, p.lng]), { color: '#C8102E', weight: 4, dashArray: '8, 8' }).addTo(routeLayer);
-    map.fitBounds(line.getBounds(), { padding: [40, 40] });
-    if (resBox) {
-      resBox.hidden = false;
-      resBox.innerHTML = `<p style="margin:0"><strong>Ruta en línea recta trazada</strong> (${pts.length} puntos seleccionados)</p>`;
-    }
+    line = L.polyline(pts.map(p => [p.lat, p.lng]), { color: '#C8102E', weight: 4, dashArray: '8, 8' }).addTo(routeLayer);
+    // Cálculo aproximado (60 km/h media) si falla la API externa
+    const km = calcHaversineKm(pts);
+    const durationMin = Math.max(5, Math.round((km / 60) * 60));
+    const hours = Math.floor(durationMin / 60);
+    const mins = durationMin % 60;
+    timeStr = hours > 0 ? `~${hours} h ${mins} min` : `~${mins} min`;
   }
+
+  map.fitBounds(line.getBounds(), { padding: [50, 50] });
+
+  // Mostrar Pop-up directamente en el mapa con imagen y tiempo estimado
+  const firstImg = pts[0].imagenes?.[0] || './imagen/puntacana.jpg';
+  const midPt = pts[Math.floor(pts.length / 2)];
+  
+  const popupHtml = `
+    <div style="min-width:200px; max-width:240px; color:#2B2B2B; font-family:var(--f-body);">
+      <img src="${esc(firstImg)}" alt="Ruta" style="width:100%; height:110px; object-fit:cover; border-radius:8px; margin-bottom:0.5rem;" onerror="this.src='./imagen/puntacana.jpg'">
+      <strong style="display:block; font-size:1rem; margin-bottom:0.2rem;">🚗 Ruta (${pts.length} puntos)</strong>
+      <span style="display:block; font-size:0.9rem;">⏱️ Tiempo estimado: <strong>${timeStr}</strong></span>
+    </div>
+  `;
+
+  L.popup({ closeOnClick: false, autoClose: false })
+    .setLatLng([midPt.lat, midPt.lng])
+    .setContent(popupHtml)
+    .openOn(map);
 }
